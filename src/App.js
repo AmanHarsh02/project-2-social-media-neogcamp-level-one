@@ -7,20 +7,73 @@ import {
   Profile,
   Bookmarks,
   Post,
+  Login,
+  Signup,
 } from "./pages/index";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <div className="text-3xl font-bold underline">
-      <h1>Project - 2</h1>
+    <div className="text-slate-800 relative">
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/profile/:userName" element={<Profile />} />
-        <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/post/:postId" element={<Post />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Landing />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <ProtectedRoute>
+              <Explore />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/:userName"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/bookmarks"
+          element={
+            <ProtectedRoute>
+              <Bookmarks />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/post/:postId"
+          element={
+            <ProtectedRoute>
+              <Post />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
+      {/* <ToastContainer
+        autoClose={3000}
+        className="w-min max-w-sm shadow-lg p-4 absolute top-0"
+      /> */}
     </div>
   );
 }
