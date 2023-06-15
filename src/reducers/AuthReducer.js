@@ -4,6 +4,7 @@ export const authInitialState = {
   firstName: "",
   lastName: "",
   location: "",
+  error: "",
 };
 
 export const authReducer = (state, action) => {
@@ -27,6 +28,8 @@ export const authReducer = (state, action) => {
         lastName: "",
         location: "",
       };
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
     default:
       return { ...state };
   }
