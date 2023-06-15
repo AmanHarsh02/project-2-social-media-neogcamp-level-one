@@ -1,17 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { BiUser as UserIcon, BiLockAlt as LockIcon } from "react-icons/bi";
 import { FaEye as EyeIcon, FaEyeSlash as EyeOffIcon } from "react-icons/fa";
 import { useLocation } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
+import { NavLink } from "react-router-dom";
 
 export function Login() {
   const location = useLocation();
   const {
-    authState: { username, password },
+    authState: { username, password, error },
     authDispatch,
     loginValidation,
   } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    authDispatch({ type: "SET_USERNAME", payload: "" });
+    authDispatch({ type: "SET_PASSWORD", payload: "" });
+    authDispatch({
+      type: "SET_ERROR",
+      payload: "",
+    });
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -26,16 +36,23 @@ export function Login() {
   const handleGuestLogin = () => {
     authDispatch({ type: "SET_USERNAME", payload: "amanharsh" });
     authDispatch({ type: "SET_PASSWORD", payload: "amanharsh123" });
+    authDispatch({
+      type: "SET_ERROR",
+      payload: "",
+    });
   };
 
   return (
     <div className="min-h-screen flex justify-between">
-      <div className="bg-blue-400 grow hidden md:flex h-screen justify-center items-center">
+      <div className="bg-blue-400 w-[50%] hidden md:flex h-screen justify-center items-center">
         <h1>Logo</h1>
       </div>
 
-      <div className="bg-blue-100 grow flex h-screen justify-center items-center">
-        <form className="min-w-[50%]">
+      <div className="bg-blue-100 w-[50%] grow flex h-screen justify-center items-center">
+        <form
+          onSubmit={handleLogin}
+          className="w-[80%] max-w-[400px] md:w-[50%]"
+        >
           <div className="flex flex-col gap-2 shadow-md rounded-md p-3 bg-blue-50">
             <div className="flex bg-white p-2 px-2 gap-1 items-center rounded-md outline outline-1 outline-gray-300  focus-within:outline-blue-400 focus-within:outline-1">
               <UserIcon className="text-gray-400 h-5 w-5" />
@@ -81,10 +98,19 @@ export function Login() {
                 />
               )}
             </div>
+            <div className="text-sm mb-4">
+              <span className="mr-1">New user?</span>
+
+              <NavLink
+                to="/signup"
+                className="w-max underline underline-offset-2 text-slate-600 hover:text-slate-800"
+              >
+                Sign-up
+              </NavLink>
+            </div>
             <button
               type="submit"
               value="submit"
-              onClick={handleLogin}
               className="bg-blue-400 text-white p-1.5 rounded-md hover:bg-blue-300"
             >
               Login
@@ -95,6 +121,9 @@ export function Login() {
             >
               Set Test Credentials
             </p>
+            {error && (
+              <p className="text-red-600 text-center break-words">{`* ${error}`}</p>
+            )}
           </div>
         </form>
       </div>

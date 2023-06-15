@@ -24,15 +24,15 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Landing />
+              <Home />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/home"
+          path="/landing"
           element={
             <ProtectedRoute>
-              <Home />
+              <Landing />
             </ProtectedRoute>
           }
         />

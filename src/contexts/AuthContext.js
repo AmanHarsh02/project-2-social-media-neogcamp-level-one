@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { authInitialState, authReducer } from "../reducers/AuthReducer";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
@@ -43,12 +42,7 @@ export function AuthProvider({ children }) {
         password: authState.password,
       });
 
-      console.log("hello");
-
-      console.log(response.data.encodedToken, response.data.foundUser);
-
       if (response.status === 200) {
-        toast.success("Login Successful");
         setLoggedIn(true);
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.foundUser));
@@ -56,24 +50,84 @@ export function AuthProvider({ children }) {
         navigate("/");
       }
     } catch (e) {
+      if (e.response.status === 404) {
+        authDispatch({
+          type: "SET_ERROR",
+          payload: "User not found. Please enter correct username & password",
+        });
+      } else if (e.response.status === 401) {
+        authDispatch({
+          type: "SET_ERROR",
+          payload:
+            "The credentials you entered are invalid. Unauthorized access error",
+        });
+      } else {
+        authDispatch({
+          type: "SET_ERROR",
+          payload: e.message,
+        });
+      }
+
       console.error(e);
     } finally {
       // setIsLoading(false);
     }
   };
 
-  const performSignup = () => {};
+  const performSignup = async () => {
+    try {
+      const response = await axios.post("/api/auth/signup", {
+        firstName: authState.firstName,
+        lastName: authState.lastName,
+        username: authState.username,
+        password: authState.password,
+      });
+
+      if (response.status === 201) {
+        setLoggedIn(true);
+        localStorage.setItem("token", response.data.encodedToken);
+        localStorage.setItem("user", JSON.stringify(response.data.createdUser));
+
+        navigate("/");
+      }
+    } catch (e) {
+      if (e.response.status === 422) {
+        authDispatch({
+          type: "SET_ERROR",
+          payload: "Username already exists. Please select another username",
+        });
+      } else {
+        authDispatch({
+          type: "SET_ERROR",
+          payload: e.message,
+        });
+      }
+
+      console.error(e);
+    } finally {
+      // setIsLoading(false);
+    }
+  };
 
   const loginValidation = () => {
     if (
       authState.username.trim().length <= 0 &&
       authState.password.trim().length <= 0
     ) {
-      return console.error("Username & Password cannot be empty");
+      return authDispatch({
+        type: "SET_ERROR",
+        payload: "Username & Password cannot be empty",
+      });
     } else if (authState.username.trim().length <= 0) {
-      return console.error("Username cannot be empty");
+      return authDispatch({
+        type: "SET_ERROR",
+        payload: "Username cannot be empty",
+      });
     } else if (authState.password.trim().length <= 0) {
-      return console.error("Password cannot be empty");
+      return authDispatch({
+        type: "SET_ERROR",
+        payload: "Password cannot be empty",
+      });
     }
 
     method = "login";
@@ -83,9 +137,42 @@ export function AuthProvider({ children }) {
     });
   };
 
+  const signupValidation = () => {
+    if (
+      authState.username.trim().length <= 0 ||
+      authState.password.trim().length <= 0 ||
+      authState.firstName.trim().length <= 0 ||
+      authState.lastName.trim().length <= 0
+    ) {
+      return authDispatch({
+        type: "SET_ERROR",
+        payload: "Please fill out all the fields",
+      });
+    }
+
+    authDispatch({
+      type: "SET_ERROR",
+      payload: "",
+    });
+
+    method = "signup";
+    setUserDetails({
+      username: authState.username,
+      password: authState.password,
+      firstName: authState.firstName,
+      lastName: authState.lastName,
+    });
+  };
+
   return (
     <AuthContext.Provider
-      value={{ loggedIn, authState, authDispatch, loginValidation }}
+      value={{
+        loggedIn,
+        authState,
+        authDispatch,
+        loginValidation,
+        signupValidation,
+      }}
     >
       {children}
     </AuthContext.Provider>
