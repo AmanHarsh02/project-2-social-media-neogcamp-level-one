@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
 
 /**
@@ -20,7 +19,7 @@ export const posts = [
     comments: [
       {
         _id: "okzxcf",
-        username: "alicesmith",
+        username: "amanharsh",
         text: "I'm looking forward to it too! It's always fun exploring new places with fellow photographers.",
         votes: {
           upvotedBy: [],
@@ -28,7 +27,7 @@ export const posts = [
         },
       },
     ],
-    username: "amanharsh",
+    username: "alicesmith",
     createdAt: "2022-01-10T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -37,14 +36,14 @@ export const posts = [
     content:
       "Check out this stunning landscape shot I took during my recent trip!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188886/upload-socialmedia/landscape-photo.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686988965/SnapSquad/post-images/IMG_1041_qdxc0u.jpg",
     likes: {
       likeCount: 18,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [],
-    username: "alicesmith",
+    username: "amanharsh",
     createdAt: "2022-05-21T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -53,7 +52,7 @@ export const posts = [
     content:
       "Sharing some macro shots I captured in my backyard. Nature never ceases to amaze me!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188492/upload-socialmedia/macro-photography.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686988843/SnapSquad/post-images/IMG_8746_hhir5c.jpg",
     likes: {
       likeCount: 14,
       likedBy: [],
@@ -77,11 +76,11 @@ export const posts = [
   {
     _id: "pOX2sDQF7e",
     content:
-      "Just returned from a photography workshop. Learned so many new techniques! Here's a sneak peek of what I captured.",
+      "Just returned from a photography workshop. Learned so many new techniques! Here's Jaipur's Aksharsham Temple during a cloudy night!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188954/upload-socialmedia/workshop-shot.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989691/SnapSquad/post-images/IMG_7406_xj88md.jpg",
     likes: {
-      likeCount: 3,
+      likeCount: 27,
       likedBy: [],
       dislikedBy: [],
     },
@@ -93,9 +92,9 @@ export const posts = [
   {
     _id: "fIHrB5Ny3X",
     content:
-      "Had a great time exploring the countryside with my camera. Nature never fails to inspire me!",
+      "Had a great time exploring the countryside with my camera. Nature never fails to inspire me! Captured these Star Trails during the night.",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188771/upload-socialmedia/countryside.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989828/SnapSquad/post-images/StarTrails_rsbqwm.jpg",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -105,7 +104,7 @@ export const posts = [
       {
         _id: "wcvTY7qrM4",
         username: "carolwilliams",
-        text: "These landscapes are breathtaking! I can almost feel the serenity.",
+        text: "This is breathtaking! I can almost feel the serenity.",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -119,9 +118,9 @@ export const posts = [
   {
     _id: "tUH3oPm6Rx",
     content:
-      "Experimenting with long exposure photography at night. Love how the city lights create beautiful light trails.",
+      "Experimenting with long exposure photography at sunset. Love how God painted the sky today!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189102/upload-socialmedia/long-exposure.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989097/SnapSquad/post-images/IMG_8312_rq8iro.jpg",
     likes: {
       likeCount: 34,
       likedBy: [],
@@ -160,9 +159,9 @@ export const posts = [
   {
     _id: "kLWR4sJg6E",
     content:
-      "Captured this beautiful portrait during a street photography session. Love the expression!",
+      "Captured this beautiful Kingfisher with a kill during a photography session!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189298/upload-socialmedia/street-portrait.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989220/SnapSquad/post-images/IMG_9234_oiscpe.jpg",
     likes: {
       likeCount: 4,
       likedBy: [],
@@ -176,11 +175,11 @@ export const posts = [
   {
     _id: "mNDu3jZb2A",
     content:
-      "Throwback to my trip to the mountains. The view from the top was absolutely breathtaking!",
+      "The magnificient Mehrangarh Fort of Jodhpur with the rarest Super Blue Blood Moon. The view from the top was absolutely breathtaking!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189447/upload-socialmedia/mountain-view.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989508/SnapSquad/post-images/IMG_8553_uidd77.jpg",
     likes: {
-      likeCount: 6,
+      likeCount: 25,
       likedBy: [],
       dislikedBy: [],
     },
@@ -188,14 +187,14 @@ export const posts = [
       {
         _id: "oDEs6fWc9V",
         username: "alicesmith",
-        text: "I can imagine the sense of wonder you felt. Mountains always leave a lasting impression.",
+        text: "I can imagine the sense of wonder you felt. City lights always leave a lasting impression.",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
         },
       },
     ],
-    username: "davidbrown",
+    username: "amanharsh",
     createdAt: "2022-11-12T12:10:00+05:30",
     updatedAt: formatDate(),
   },
@@ -217,11 +216,11 @@ export const posts = [
   {
     _id: "dJIs5kAv4G",
     content:
-      "Explored the city's street art scene and captured some vibrant shots. Street photography is so full of life!",
+      "Captured this shot during a Pre-Wedding shoot. Loved the architectural beuaty with an amazing sunset!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189664/upload-socialmedia/street-art.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990213/SnapSquad/post-images/IMG_0024_hrhhjj.jpg",
     likes: {
-      likeCount: 3,
+      likeCount: 18,
       likedBy: [],
       dislikedBy: [],
     },
@@ -229,25 +228,24 @@ export const posts = [
       {
         _id: "pQWe2rXs5B",
         username: "",
-        text: "These photos capture the essence of street art so well. It's like bringing the walls to life!",
+        text: "These photos capture the essence of heritage art so well. It's like bringing the walls to life!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
         },
       },
     ],
-    username: "frankwilson",
+    username: "amanharsh",
     createdAt: "2023-02-15T10:05:00+05:30",
     updatedAt: formatDate(),
   },
   {
     _id: "gKLt7qFu3D",
-    content:
-      "Sharing a series of black and white portraits I took. There's something timeless about monochrome photography.",
+    content: "Steel Wool Orb. I love doing long exposure photography!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189816/upload-socialmedia/black-white-portraits.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990738/SnapSquad/post-images/IMG_5479_jraj4x.jpg",
     likes: {
-      likeCount: 5,
+      likeCount: 12,
       likedBy: [],
       dislikedBy: [],
     },
@@ -259,11 +257,11 @@ export const posts = [
   {
     _id: "jYRl5qNd4S",
     content:
-      "Documented a local cultural festival with my camera. The colors and traditions were absolutely captivating!",
+      "Last weekend I attended a session steel-wool photography. Here's one shot from that session!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652189971/upload-socialmedia/cultural-festival.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990570/SnapSquad/post-images/IMG_5481_bfurjr.jpg",
     likes: {
-      likeCount: 7,
+      likeCount: 14,
       likedBy: [],
       dislikedBy: [],
     },
@@ -271,7 +269,7 @@ export const posts = [
       {
         _id: "qWEr6fUv5P",
         username: "emmadavis",
-        text: "Cultural festivals are such a vibrant celebration of diversity. Your photos truly bring the atmosphere to life.",
+        text: "This is 🔥",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
