@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
 /**
  * User Database can be added here.
@@ -14,7 +13,8 @@ export const users = [
     password: "amanharsh123",
     bio: "Frontend Developer",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/alice-smith.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987695/SnapSquad/profile-images/aman-harsh_bmtklz.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -27,7 +27,8 @@ export const users = [
     password: "aliceSmith123",
     bio: "Be yourself!",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/alice-smith.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987696/SnapSquad/profile-images/alice-smith_nzzktx.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -40,7 +41,8 @@ export const users = [
     password: "bobJohnson123",
     bio: "Hello World",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/bob-johnson.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987696/SnapSquad/profile-images/bob-johnson_nzay4t.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-02T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -53,7 +55,8 @@ export const users = [
     password: "carolWilliams123",
     bio: "What's in bio?",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/carol-williams.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987696/SnapSquad/profile-images/carol-williams_vgurqc.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -65,7 +68,8 @@ export const users = [
     username: "davidbrown",
     password: "davidBrown123",
     bio: "What's in bio?",
-    avatarUrl: "https://example.com/avatars/david-brown.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987696/SnapSquad/profile-images/david-brown_mqqywo.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-03T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -78,7 +82,8 @@ export const users = [
     password: "emmaDavis123",
     bio: "Aspiring Frontend Engineer",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/emma-davis.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987696/SnapSquad/profile-images/emma-davis_pjpozk.jpg",
     website: "https://example.com/",
     createdAt: "2023-01-04T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -91,7 +96,8 @@ export const users = [
     password: "frankWilson123",
     bio: "What's up?",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/frank-wilson.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987697/SnapSquad/profile-images/frank-wilson_xoia3q.jpg",
     website: "",
     createdAt: "2023-01-05T10:55:06+05:30",
     updatedAt: formatDate(),
@@ -104,7 +110,8 @@ export const users = [
     password: "graceMartinez123",
     bio: "Frontend Engineer",
     bookmarks: [],
-    avatarUrl: "https://example.com/avatars/grace-martinez.jpg",
+    avatarUrl:
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686987697/SnapSquad/profile-images/grace-martinez_ukt6dy.jpg",
     website: "",
     createdAt: "2023-01-06T10:55:06+05:30",
     updatedAt: formatDate(),
