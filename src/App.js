@@ -10,7 +10,7 @@ import {
   Login,
   Signup,
 } from "./pages/index";
-import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute, Navbar } from "./components/index";
 import { ToastContainer } from "react-toastify";
 
 function App() {
