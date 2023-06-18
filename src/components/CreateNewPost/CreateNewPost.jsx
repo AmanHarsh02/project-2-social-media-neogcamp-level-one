@@ -1,6 +1,9 @@
 import { BiEditAlt as EditIcon, BiCamera as MediaIcon } from "react-icons/bi";
+import { useData } from "../../contexts/DataContext";
 
 export function CreateNewPost() {
+  const { user } = useData();
+
   return (
     <div className="bg-white rounded-xl">
       <div className="flex items-center gap-1 p-3">
@@ -11,12 +14,16 @@ export function CreateNewPost() {
       <hr></hr>
 
       <div className="flex flex-row gap-2 h-[130px] p-2">
-        <div className="h-[100%] w-[10%] flex justify-center ">
-          <div className="h-[4rem] w-[4rem] mt-1 rounded-full bg-blue-400"></div>
+        <div className="h-[100%] w-max flex justify-center ">
+          <img
+            src={user.avatarUrl}
+            alt={`${user.username}'s Profile Image`}
+            className="h-[4rem] w-[4rem] mt-1 rounded-full object-cover"
+          />
         </div>
 
         <textarea
-          placeholder="Have something to share? Why not post it here"
+          placeholder="Have something to share? Why not post it here!"
           className="grow resize-none outline-none p-1 placeholder:font-light"
         />
       </div>

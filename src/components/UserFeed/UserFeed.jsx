@@ -1,7 +1,14 @@
+import { useData } from "../../contexts/DataContext";
+import { PostCard } from "../index";
+
 export function UserFeed() {
+  const { userFeed } = useData();
+
   return (
-    <div className="bg-blue-400 h-screen">
-      <h1>User Feed</h1>
+    <div className="h-max flex flex-col gap-6">
+      {userFeed.map((post) => {
+        return <PostCard key={post.id} post={post} />;
+      })}
     </div>
   );
 }
