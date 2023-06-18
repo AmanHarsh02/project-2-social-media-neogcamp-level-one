@@ -8,12 +8,14 @@ import {
 import { authInitialState, authReducer } from "../reducers/AuthReducer";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useData } from "./DataContext";
 
 const AuthContext = createContext();
 let method = "";
 
 export function AuthProvider({ children }) {
   const [authState, authDispatch] = useReducer(authReducer, authInitialState);
+  const { dataDispatch } = useData();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       setLoggedIn(true);
+      dataDispatch({ type: "SET_USER", payload: JSON.parse(user) });
 
       navigate("/");
     }
@@ -46,6 +49,7 @@ export function AuthProvider({ children }) {
         setLoggedIn(true);
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.foundUser));
+        dataDispatch({ type: "SET_USER", payload: response.data.foundUser });
 
         navigate("/");
       }
@@ -87,6 +91,7 @@ export function AuthProvider({ children }) {
         setLoggedIn(true);
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.createdUser));
+        dataDispatch({ type: "SET_USER", payload: response.data.createdUser });
 
         navigate("/");
       }

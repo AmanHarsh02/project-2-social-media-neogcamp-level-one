@@ -1,0 +1,74 @@
+import { useData } from "../../contexts/DataContext";
+import { SlOptions as OptionsIcon } from "react-icons/sl";
+import {
+  BiHeart as LikeIcon,
+  BiComment as CommentIcon,
+  BiBookmark as BookMarkIcon,
+  BiSolidBookmark as BookMarkSolidIcon,
+} from "react-icons/bi";
+import { Link } from "react-router-dom";
+
+export function PostCard({ post }) {
+  const { user, users } = useData();
+
+  const postedBy = users.find(({ username }) => username === post.username);
+  const postedByCurrentUser = user.username === post.username;
+  const postDate = new Date(post.createdAt);
+
+  return (
+    <div className="h-max flex flex-col gap-4 bg-white p-2 shadow-md border border-slate-400 rounded-xl overflow-hidden">
+      <section>
+        <div className="flex items-center gap-2 overflow-hidden justify-between">
+          <div className="h-[100%] grow flex items-center gap-2">
+            <div className="w-max">
+              <img
+                src={postedBy.avatarUrl}
+                alt={`${postedBy.username}'s Profile Image`}
+                className="h-[4rem] w-[4rem] rounded-full object-cover"
+              />
+            </div>
+            <div className="grow h-[100%] flex flex-col justify-center">
+              <h3 className="-mb-1">{`${postedBy.firstName} ${postedBy.lastName}`}</h3>
+              <p className="-mt-1 text-slate-500">{`@${postedBy.username}`}</p>
+              <small className="-mt-1 text-slate-500">{`${postDate.getUTCMonth()} ${postDate.getUTCDate()} ${postDate.getUTCFullYear()}, ${postDate.getUTCHours()}:${postDate.getUTCMinutes()}${
+                postDate.getUTCHours() >= 12 ? "pm" : "am"
+              } `}</small>
+            </div>
+          </div>
+          {postedByCurrentUser && <OptionsIcon className="" />}
+        </div>
+      </section>
+
+      <Link to={`/post/${post._id}`}>
+        <section className="flex flex-col gap-2">
+          <p>{post.content}</p>
+          {post.mediaURL && (
+            <img src={post.mediaURL} alt="Post Image" className="rounded-lg" />
+          )}
+        </section>
+      </Link>
+
+      <section className="p-2 flex gap-4">
+        <div className="flex gap-1">
+          <LikeIcon size={24} className="cursor-pointer hover:fill-red-600" />
+          <p>{post.likes.likeCount}</p>
+        </div>
+
+        <div className="flex gap-1">
+          <CommentIcon
+            size={24}
+            className="cursor-pointer hover:fill-blue-400"
+          />
+          <p>{post.comments.length}</p>
+        </div>
+
+        <div className="flex gap-1">
+          <BookMarkIcon
+            size={24}
+            className="cursor-pointer hover:fill-blue-400"
+          />
+        </div>
+      </section>
+    </div>
+  );
+}
