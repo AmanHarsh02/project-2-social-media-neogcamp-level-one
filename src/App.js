@@ -9,8 +9,9 @@ import {
   Post,
   Login,
   Signup,
+  Liked,
 } from "./pages/index";
-import { ProtectedRoute, Navbar } from "./components/index";
+import { ProtectedRoute, Navbar, PageWrapper } from "./components/index";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+              <PageWrapper>
+                <Home />
+              </PageWrapper>
             </ProtectedRoute>
           }
         />
@@ -40,7 +43,9 @@ function App() {
           path="/explore"
           element={
             <ProtectedRoute>
-              <Explore />
+              <PageWrapper>
+                <Explore />
+              </PageWrapper>
             </ProtectedRoute>
           }
         />
@@ -48,7 +53,9 @@ function App() {
           path="/profile/:userName"
           element={
             <ProtectedRoute>
-              <Profile />
+              <PageWrapper>
+                <Profile />
+              </PageWrapper>
             </ProtectedRoute>
           }
         />
@@ -56,7 +63,19 @@ function App() {
           path="/bookmarks"
           element={
             <ProtectedRoute>
-              <Bookmarks />
+              <PageWrapper>
+                <Bookmarks />
+              </PageWrapper>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/liked"
+          element={
+            <ProtectedRoute>
+              <PageWrapper>
+                <Liked />
+              </PageWrapper>
             </ProtectedRoute>
           }
         />
@@ -64,7 +83,9 @@ function App() {
           path="/post/:postId"
           element={
             <ProtectedRoute>
-              <Post />
+              <PageWrapper>
+                <Post />
+              </PageWrapper>
             </ProtectedRoute>
           }
         />

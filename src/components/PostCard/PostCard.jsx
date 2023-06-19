@@ -1,19 +1,37 @@
 import { useData } from "../../contexts/DataContext";
+import { usePost } from "../../contexts/PostContext";
 import { SlOptions as OptionsIcon } from "react-icons/sl";
 import {
-  BiHeart as LikeIcon,
   BiComment as CommentIcon,
   BiBookmark as BookMarkIcon,
   BiSolidBookmark as BookMarkSolidIcon,
 } from "react-icons/bi";
+import {
+  AiOutlineHeart as LikeIcon,
+  AiFillHeart as LikedIcon,
+} from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 export function PostCard({ post }) {
   const { user, users } = useData();
+  const { likePost, dislikePost, postLoading } = usePost();
 
   const postedBy = users.find(({ username }) => username === post.username);
   const postedByCurrentUser = user.username === post.username;
   const postDate = new Date(post.createdAt);
+  const postLiked = post.likes.likedBy.find(
+    ({ username }) => username === user.username
+  );
+
+  const handlePostLike = () => {
+    if (!postLoading) {
+      if (!postLiked) {
+        likePost(post._id);
+      } else {
+        dislikePost(post._id);
+      }
+    }
+  };
 
   return (
     <div className="h-max flex flex-col gap-4 bg-white p-2 shadow-md border border-slate-400 rounded-xl overflow-hidden">
@@ -50,7 +68,20 @@ export function PostCard({ post }) {
 
       <section className="p-2 flex gap-4">
         <div className="flex gap-1">
-          <LikeIcon size={24} className="cursor-pointer hover:fill-red-600" />
+          {postLiked ? (
+            <LikedIcon
+              onClick={handlePostLike}
+              size={24}
+              className="cursor-pointer fill-red-600"
+            />
+          ) : (
+            <LikeIcon
+              onClick={handlePostLike}
+              size={24}
+              className="cursor-pointer hover:fill-red-600"
+            />
+          )}
+
           <p>{post.likes.likeCount}</p>
         </div>
 
