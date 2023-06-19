@@ -6,3 +6,4 @@ export { Bookmarks } from "./Bookmarks/Bookmarks";
 export { Post } from "./Post/Post";
 export { Login } from "./Auth/Login/Login";
 export { Signup } from "./Auth/Signup/Signup";
+export { Liked } from "./Liked/Liked";

@@ -6,3 +6,4 @@ export { CreateNewPost } from "./CreateNewPost/CreateNewPost";
 export { Navbar } from "./Navbar/Navbar";
 export { PostCard } from "./PostCard/PostCard";
 export { UserCard } from "./UserCard/UserCard";
+export { PageWrapper } from "./PageWrapper/PageWrapper";
