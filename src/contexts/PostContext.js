@@ -2,11 +2,13 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { postInitialState, postReducer } from "../reducers/PostReducer";
 import axios from "axios";
 import { useData } from "./DataContext";
+import { useAuth } from "./AuthContext";
 
 const PostContext = createContext();
 
 export function PostProvider({ children }) {
   const { user, posts, dataDispatch } = useData();
+  const { getUser } = useAuth();
   const [postState, postDispatch] = useReducer(postReducer, postInitialState);
   const token = localStorage.getItem("token");
 
@@ -28,7 +30,7 @@ export function PostProvider({ children }) {
   }, [posts]);
 
   const getPost = async (postId) => {
-    postDispatch({ type: "SET_LOADING" });
+    postDispatch({ type: "SET_LOADING", payload: true });
     try {
       const response = await axios.get(`/api/posts/${postId}`);
       const post = response.data.post;
@@ -39,12 +41,12 @@ export function PostProvider({ children }) {
     } catch (e) {
       console.error(e);
     } finally {
-      postDispatch({ type: "SET_LOADING" });
+      postDispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
   const likePost = async (postId) => {
-    postDispatch({ type: "SET_LOADING" });
+    postDispatch({ type: "SET_LOADING", payload: true });
     try {
       const response = await axios.post(`/api/posts/like/${postId}`, "", {
         headers: { authorization: token },
@@ -57,12 +59,12 @@ export function PostProvider({ children }) {
     } catch (e) {
       console.error(e);
     } finally {
-      postDispatch({ type: "SET_LOADING" });
+      postDispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
   const dislikePost = async (postId) => {
-    postDispatch({ type: "SET_LOADING" });
+    postDispatch({ type: "SET_LOADING", payload: true });
     try {
       const response = await axios.post(`/api/posts/dislike/${postId}`, "", {
         headers: { authorization: token },
@@ -75,7 +77,74 @@ export function PostProvider({ children }) {
     } catch (e) {
       console.error(e);
     } finally {
-      postDispatch({ type: "SET_LOADING" });
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const getBookmarks = async () => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+    try {
+      const response = await axios.get("/api/users/bookmark", {
+        headers: { authorization: token },
+      });
+      const bookmarks = response.data.bookmarks;
+      const bookMarkedPosts = posts.filter(({ _id }) =>
+        bookmarks.includes(_id)
+      );
+
+      if (response.status === 200) {
+        postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const addBookmark = async (postId) => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+    try {
+      const response = await axios.post(`/api/users/bookmark/${postId}`, "", {
+        headers: { authorization: token },
+      });
+      const bookmarks = response.data.bookmarks;
+      const bookMarkedPosts = posts.filter(({ _id }) =>
+        bookmarks.includes(_id)
+      );
+
+      if (response.status === 200) {
+        postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const removeBookmark = async (postId) => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+    try {
+      const response = await axios.post(
+        `/api/users/remove-bookmark/${postId}`,
+        "",
+        {
+          headers: { authorization: token },
+        }
+      );
+      const bookmarks = response.data.bookmarks;
+      const bookMarkedPosts = posts.filter(({ _id }) =>
+        bookmarks.includes(_id)
+      );
+
+      if (response.status === 200) {
+        postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
@@ -90,6 +159,9 @@ export function PostProvider({ children }) {
         getPost,
         likePost,
         dislikePost,
+        getBookmarks,
+        addBookmark,
+        removeBookmark,
       }}
     >
       {children}

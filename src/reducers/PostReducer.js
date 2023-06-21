@@ -11,10 +11,11 @@ export const postReducer = (state, action) => {
       return { ...state, post: action.payload };
     case "SET_LIKED":
       return { ...state, likedPosts: action.payload };
-    case "SET_BOOKMARK":
+    case "SET_BOOKMARKS":
       return { ...state, savedPosts: action.payload };
-    case "SET_LOADING":
-      return { ...state, postLoading: !state.postLoading };
+    case "SET_LOADING": {
+      return { ...state, postLoading: action.payload };
+    }
     default:
       return { ...state };
   }

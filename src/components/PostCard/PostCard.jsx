@@ -4,17 +4,24 @@ import { SlOptions as OptionsIcon } from "react-icons/sl";
 import {
   BiComment as CommentIcon,
   BiBookmark as BookMarkIcon,
-  BiSolidBookmark as BookMarkSolidIcon,
 } from "react-icons/bi";
 import {
   AiOutlineHeart as LikeIcon,
-  AiFillHeart as LikedIcon,
+  AiFillHeart as LikeSolidIcon,
 } from "react-icons/ai";
+import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 export function PostCard({ post }) {
   const { user, users } = useData();
-  const { likePost, dislikePost, postLoading } = usePost();
+  const {
+    likePost,
+    dislikePost,
+    postLoading,
+    addBookmark,
+    removeBookmark,
+    savedPosts,
+  } = usePost();
 
   const postedBy = users.find(({ username }) => username === post.username);
   const postedByCurrentUser = user.username === post.username;
@@ -22,6 +29,7 @@ export function PostCard({ post }) {
   const postLiked = post.likes.likedBy.find(
     ({ username }) => username === user.username
   );
+  const postBookmarked = savedPosts.some(({ _id }) => _id === post._id);
 
   const handlePostLike = () => {
     if (!postLoading) {
@@ -29,6 +37,16 @@ export function PostCard({ post }) {
         likePost(post._id);
       } else {
         dislikePost(post._id);
+      }
+    }
+  };
+
+  const handlePostBookmark = () => {
+    if (!postLoading) {
+      if (!postBookmarked) {
+        addBookmark(post._id);
+      } else {
+        removeBookmark(post._id);
       }
     }
   };
@@ -69,7 +87,7 @@ export function PostCard({ post }) {
       <section className="p-2 flex gap-4">
         <div className="flex gap-1">
           {postLiked ? (
-            <LikedIcon
+            <LikeSolidIcon
               onClick={handlePostLike}
               size={24}
               className="cursor-pointer fill-red-600"
@@ -94,10 +112,19 @@ export function PostCard({ post }) {
         </div>
 
         <div className="flex gap-1">
-          <BookMarkIcon
-            size={24}
-            className="cursor-pointer hover:fill-blue-400"
-          />
+          {postBookmarked ? (
+            <BookMarkSolidIcon
+              onClick={handlePostBookmark}
+              size={22}
+              className="cursor-pointer fill-blue-400"
+            />
+          ) : (
+            <BookMarkIcon
+              onClick={handlePostBookmark}
+              size={24}
+              className="cursor-pointer hover:fill-blue-400"
+            />
+          )}
         </div>
       </section>
     </div>
