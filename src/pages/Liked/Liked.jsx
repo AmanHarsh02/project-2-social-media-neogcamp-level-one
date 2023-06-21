@@ -4,8 +4,6 @@ import { usePost } from "../../contexts/PostContext";
 export function Liked() {
   const { likedPosts } = usePost();
 
-  console.log(likedPosts);
-
   return (
     <div className="flex flex-col gap-6">
       {likedPosts.map((post) => {

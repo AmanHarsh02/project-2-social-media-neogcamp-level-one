@@ -7,7 +7,7 @@ export function UserFeed() {
   return (
     <div className="h-max flex flex-col gap-6">
       {userFeed.map((post) => {
-        return <PostCard key={post.id} post={post} />;
+        return <PostCard key={post._id} post={post} />;
       })}
     </div>
   );
