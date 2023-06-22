@@ -10,9 +10,10 @@ import {
   AiFillHeart as LikeSolidIcon,
 } from "react-icons/ai";
 import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { CommentCard } from "../CommentCard/CommentCard";
 
-export function PostCard({ post }) {
+export function PostCard({ post, showComment }) {
   const { user, users } = useData();
   const {
     likePost,
@@ -22,6 +23,7 @@ export function PostCard({ post }) {
     removeBookmark,
     savedPosts,
   } = usePost();
+  const navigate = useNavigate();
 
   const postedBy = users.find(({ username }) => username === post.username);
   const postedByCurrentUser = user.username === post.username;
@@ -58,13 +60,13 @@ export function PostCard({ post }) {
           <div className="h-[100%] grow flex items-center gap-2">
             <div className="w-max">
               <img
-                src={postedBy.avatarUrl}
-                alt={`${postedBy.username}'s Profile Image`}
+                src={postedBy?.avatarUrl}
+                alt={`${postedBy?.username}'s Profile Image`}
                 className="h-[4rem] w-[4rem] rounded-full object-cover"
               />
             </div>
             <div className="grow h-[100%] flex flex-col justify-center">
-              <h3 className="-mb-1">{`${postedBy.firstName} ${postedBy.lastName}`}</h3>
+              <h3 className="-mb-1">{`${postedBy?.firstName} ${postedBy?.lastName}`}</h3>
               <p className="-mt-1 text-slate-500">{`@${postedBy.username}`}</p>
               <small className="-mt-1 text-slate-500">{`${postDate.getUTCMonth()} ${postDate.getUTCDate()} ${postDate.getUTCFullYear()}, ${postDate.getUTCHours()}:${postDate.getUTCMinutes()}${
                 postDate.getUTCHours() >= 12 ? "pm" : "am"
@@ -75,10 +77,10 @@ export function PostCard({ post }) {
         </div>
       </section>
 
-      <Link to={`/post/${post._id}`}>
+      <Link to={`/post/${post?._id}`}>
         <section className="flex flex-col gap-2">
-          <p>{post.content}</p>
-          {post.mediaURL && (
+          <p>{post?.content}</p>
+          {post?.mediaURL && (
             <img src={post.mediaURL} alt="Post Image" className="rounded-lg" />
           )}
         </section>
@@ -100,15 +102,16 @@ export function PostCard({ post }) {
             />
           )}
 
-          <p>{post.likes.likeCount}</p>
+          <p>{post?.likes?.likeCount}</p>
         </div>
 
         <div className="flex gap-1">
           <CommentIcon
+            onClick={() => navigate(`/post/${post?._id}`)}
             size={24}
             className="cursor-pointer hover:fill-blue-400"
           />
-          <p>{post.comments.length}</p>
+          <p>{post?.comments.length}</p>
         </div>
 
         <div className="flex gap-1">
@@ -127,6 +130,17 @@ export function PostCard({ post }) {
           )}
         </div>
       </section>
+
+      {showComment &&
+        post?.comments.length > 0 &&
+        post?.comments.map((comment) => {
+          return (
+            <>
+              <hr></hr>
+              <CommentCard key={comment._id} comment={comment} />
+            </>
+          );
+        })}
     </div>
   );
 }

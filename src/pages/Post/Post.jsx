@@ -17,7 +17,7 @@ export function Post() {
 
   return (
     <div className="flex flex-col gap-6">
-      {post?._id === postId && <PostCard post={post} />}
+      {post?._id === postId && <PostCard post={post} showComment={true} />}
       {postLoading && <h2>Loading...</h2>}
     </div>
   );
