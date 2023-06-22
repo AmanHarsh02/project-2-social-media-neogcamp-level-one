@@ -193,6 +193,15 @@ export const posts = [
           downvotedBy: [],
         },
       },
+      {
+        _id: "oDEs6fWc9S",
+        username: "frankwilson",
+        text: "I can imagine the sense of wonder you felt. City lights always leave a lasting impression.",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
     ],
     username: "amanharsh",
     createdAt: "2022-11-12T12:10:00+05:30",
@@ -227,7 +236,7 @@ export const posts = [
     comments: [
       {
         _id: "pQWe2rXs5B",
-        username: "",
+        username: "bobjohnson",
         text: "These photos capture the essence of heritage art so well. It's like bringing the walls to life!",
         votes: {
           upvotedBy: [],

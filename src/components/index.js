@@ -7,3 +7,5 @@ export { Navbar } from "./Navbar/Navbar";
 export { PostCard } from "./PostCard/PostCard";
 export { UserCard } from "./UserCard/UserCard";
 export { PageWrapper } from "./PageWrapper/PageWrapper";
+export { CommentCard } from "./CommentCard/CommentCard";
+export { GenericModal } from "./GenericModal/GenericModal";

@@ -54,6 +54,20 @@ export function DataProvider({ children }) {
     dataDispatch({ type: "SET_USER_FEED", payload: userFeed });
   };
 
+  const getUser = async (userName) => {
+    try {
+      const commentBy = dataState.users.find(
+        ({ username }) => username === userName
+      );
+
+      const response = await axios.get(`/api/users/${commentBy._id}`);
+
+      return response.data.user;
+    } catch (e) {
+      console.errore();
+    }
+  };
+
   useEffect(() => {
     if (dataState.user) {
       fetchAllUsers();
@@ -76,6 +90,7 @@ export function DataProvider({ children }) {
         userFeed: dataState.userFeed,
         isLoading: dataState.isLoading,
         dataDispatch,
+        getUser,
       }}
     >
       {children}
