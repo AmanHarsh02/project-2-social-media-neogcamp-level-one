@@ -13,8 +13,6 @@ export function Post() {
     getPost(postId);
   }, [posts]);
 
-  console.log(post);
-
   return (
     <div className="flex flex-col gap-6">
       {post?._id === postId && <PostCard post={post} showComment={true} />}

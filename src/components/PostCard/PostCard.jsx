@@ -12,6 +12,8 @@ import {
 import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { CommentCard } from "../CommentCard/CommentCard";
+import { useState } from "react";
+import { PostActions } from "../PostActions/PostActions";
 
 export function PostCard({ post, showComment }) {
   const { user, users } = useData();
@@ -23,6 +25,7 @@ export function PostCard({ post, showComment }) {
     removeBookmark,
     savedPosts,
   } = usePost();
+  const [showPostActions, setShowPostActions] = useState(false);
   const navigate = useNavigate();
 
   const postedBy = users.find(({ username }) => username === post.username);
@@ -54,7 +57,7 @@ export function PostCard({ post, showComment }) {
   };
 
   return (
-    <div className="h-max flex flex-col gap-4 bg-white p-2 shadow-md border border-slate-400 rounded-xl overflow-hidden">
+    <div className="relative h-max flex flex-col gap-4 bg-white p-2 shadow-md border border-slate-400 rounded-xl overflow-hidden">
       <section>
         <div className="flex items-center gap-2 overflow-hidden justify-between">
           <div className="h-[100%] grow flex items-center gap-2">
@@ -68,12 +71,21 @@ export function PostCard({ post, showComment }) {
             <div className="grow h-[100%] flex flex-col justify-center">
               <h3 className="-mb-1">{`${postedBy?.firstName} ${postedBy?.lastName}`}</h3>
               <p className="-mt-1 text-slate-500">{`@${postedBy.username}`}</p>
-              <small className="-mt-1 text-slate-500">{`${postDate.getUTCMonth()} ${postDate.getUTCDate()} ${postDate.getUTCFullYear()}, ${postDate.getUTCHours()}:${postDate.getUTCMinutes()}${
+              <small className="-mt-1 text-slate-500">{`${postDate.getUTCMonth()}-${postDate.getUTCDate()}-${postDate.getUTCFullYear()}, ${postDate.getUTCHours()}:${postDate.getUTCMinutes()}${
                 postDate.getUTCHours() >= 12 ? "pm" : "am"
               } `}</small>
             </div>
           </div>
-          {postedByCurrentUser && <OptionsIcon className="" />}
+
+          {postedByCurrentUser && (
+            <div
+              className="cursor-pointer p-2 rounded-full hover:bg-slate-200 hover:text-blue-400"
+              onClick={() => setShowPostActions(!showPostActions)}
+            >
+              <OptionsIcon size={18} />
+            </div>
+          )}
+          {showPostActions && <PostActions postId={post?._id} />}
         </div>
       </section>
 
@@ -111,7 +123,7 @@ export function PostCard({ post, showComment }) {
             size={24}
             className="cursor-pointer hover:fill-blue-400"
           />
-          <p>{post?.comments.length}</p>
+          <p>{post?.comments?.length}</p>
         </div>
 
         <div className="flex gap-1">
@@ -132,7 +144,7 @@ export function PostCard({ post, showComment }) {
       </section>
 
       {showComment &&
-        post?.comments.length > 0 &&
+        post?.comments?.length > 0 &&
         post?.comments.map((comment) => {
           return (
             <>

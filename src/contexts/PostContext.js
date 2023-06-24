@@ -148,6 +148,83 @@ export function PostProvider({ children }) {
     }
   };
 
+  const handleCreatePost = async (postContent, mediaUrl) => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+
+    const post = {
+      content: postContent,
+      mediaUrl,
+    };
+
+    try {
+      const response = await axios.post(
+        "/api/posts/",
+        { postData: post },
+        {
+          headers: { authorization: token },
+        }
+      );
+
+      const updatedPosts = response.data.posts;
+
+      if (response.status === 201) {
+        dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const handleDeletePost = async (postId) => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+    try {
+      const response = await axios.delete(`/api/posts/${postId}`, {
+        headers: { authorization: token },
+      });
+
+      const updatedPosts = response.data.posts;
+
+      if (response.status === 201) {
+        dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const handleEditPost = async (postId, postContent, mediaUrl) => {
+    postDispatch({ type: "SET_LOADING", payload: true });
+
+    const post = {
+      content: postContent,
+      mediaUrl,
+    };
+
+    try {
+      const response = await axios.post(
+        `/api/posts/edit/${postId}`,
+        { postData: post },
+        {
+          headers: { authorization: token },
+        }
+      );
+
+      const updatedPosts = response.data.posts;
+
+      if (response.status === 201) {
+        dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -162,6 +239,9 @@ export function PostProvider({ children }) {
         getBookmarks,
         addBookmark,
         removeBookmark,
+        handleCreatePost,
+        handleDeletePost,
+        handleEditPost,
       }}
     >
       {children}

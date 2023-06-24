@@ -9,3 +9,4 @@ export { UserCard } from "./UserCard/UserCard";
 export { PageWrapper } from "./PageWrapper/PageWrapper";
 export { CommentCard } from "./CommentCard/CommentCard";
 export { GenericModal } from "./GenericModal/GenericModal";
+export { PostActions } from "./PostActions/PostActions";
