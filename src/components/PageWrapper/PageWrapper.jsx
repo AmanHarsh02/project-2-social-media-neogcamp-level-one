@@ -4,6 +4,7 @@ import {
   FollowSuggestions,
   GenericModal,
   CreateNewPost,
+  BottomNavigation,
 } from "../index";
 
 export function PageWrapper({ children }) {
@@ -14,7 +15,10 @@ export function PageWrapper({ children }) {
       <aside className="mb-4 w-[15%] lg:w-[20%] h-[98%] sticky top-0 hidden md:block overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <SideNavigation setShowPostModal={setShowPostModal} />
       </aside>
-      <main className="w-[100%] lg:w-[50%]">{children}</main>
+      <main className="w-[100%] lg:w-[50%] relative">
+        {children}
+        <BottomNavigation />
+      </main>
       <aside className="bg-white mb-4 w-[25%] h-[98%] sticky top-0 hidden lg:block rounded-lg overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <FollowSuggestions />
       </aside>
