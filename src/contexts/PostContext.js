@@ -153,7 +153,7 @@ export function PostProvider({ children }) {
 
     const post = {
       content: postContent,
-      mediaUrl,
+      mediaURL: mediaUrl,
     };
 
     try {
@@ -201,7 +201,7 @@ export function PostProvider({ children }) {
 
     const post = {
       content: postContent,
-      mediaUrl,
+      mediaURL: mediaUrl,
     };
 
     try {
@@ -215,6 +215,8 @@ export function PostProvider({ children }) {
 
       const updatedPosts = response.data.posts;
 
+      console.log(updatedPosts);
+
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
       }
@@ -222,6 +224,29 @@ export function PostProvider({ children }) {
       console.error(e);
     } finally {
       postDispatch({ type: "SET_LOADING", payload: false });
+    }
+  };
+
+  const handleMediaUpload = async (selectedImage) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedImage);
+      formData.append("upload_preset", "uzfl2950");
+      formData.append("folder", "SnapSquad/post-images");
+
+      const data = await fetch(
+        "https://api.cloudinary.com/v1_1/ddfyxmlhe/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      ).then((res) => res.json());
+
+      const mediaUrl = data.url;
+
+      return mediaUrl;
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -242,6 +267,7 @@ export function PostProvider({ children }) {
         handleCreatePost,
         handleDeletePost,
         handleEditPost,
+        handleMediaUpload,
       }}
     >
       {children}

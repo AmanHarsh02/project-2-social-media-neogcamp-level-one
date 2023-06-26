@@ -13,7 +13,7 @@ export function GenericModal({ children, setShowModal }) {
   };
 
   return (
-    <div className="absolute h-screen w-screen">
+    <div className="absolute h-screen w-screen z-10">
       <section
         onClick={handleModalClose}
         className="fixed top-0 bottom-0 left-0 right-0 bg-slate-800 bg-opacity-50 flex items-center justify-center"
