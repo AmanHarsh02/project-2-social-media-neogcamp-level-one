@@ -231,6 +231,7 @@ export function PostProvider({ children }) {
     try {
       const formData = new FormData();
       formData.append("file", selectedImage);
+      formData.append(":use_filename", true);
       formData.append("upload_preset", "uzfl2950");
       formData.append("folder", "SnapSquad/post-images");
 
