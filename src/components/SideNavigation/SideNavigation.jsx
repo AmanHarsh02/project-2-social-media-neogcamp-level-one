@@ -65,7 +65,7 @@ export function SideNavigation({ setShowPostModal }) {
           <p className="hidden lg:block">Liked</p>
         </NavLink>
         <NavLink
-          to="/profile/:userName"
+          to={`/profile/${user.username}`}
           className={({ isActive }) => {
             const classes =
               "flex items-center gap-2 p-2 lg:pr-6 w-max rounded-full text-xl font-medium hover:bg-blue-100 hover:shadow-md";
