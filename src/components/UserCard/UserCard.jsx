@@ -10,14 +10,18 @@ export function UserCard({ user, options }) {
         options === "profile" ? "shadow-md" : ""
       } bg-white hover:bg-slate-100`}
     >
-      <div className="h-[100%] w-max flex justify-center grow">
+      <div
+        className={`h-[100%] w-max flex justify-center grow ${
+          options === "profile" && "shrink-0"
+        }`}
+      >
         <img
           src={user.avatarUrl}
           alt={`${user.username}'s Profile Image`}
           className="h-[4rem] w-[4rem] rounded-full object-cover"
         />
       </div>
-      <div className="grow h-[100%] lg:flex flex-col justify-center hidden ">
+      <div className="grow h-[100%] lg:flex flex-col justify-center hidden">
         <h3 className="-mb-1">{`${user.firstName} ${user.lastName}`}</h3>
         <p className="-mt-1 text-slate-500">{`@${user.username}`}</p>
       </div>
