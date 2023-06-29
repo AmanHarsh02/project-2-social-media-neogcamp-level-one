@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useData } from "../../contexts/DataContext";
 import { UserCard } from "../index";
 
@@ -18,11 +19,11 @@ export function FollowSuggestions() {
 
       {suggestedUsers.map((user) => {
         return (
-          <div key={user._id}>
+          <NavLink to={`/profile/${user.username}`} key={user._id}>
             <UserCard user={user} options="follow" />
 
             <hr></hr>
-          </div>
+          </NavLink>
         );
       })}
     </div>

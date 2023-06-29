@@ -68,6 +68,23 @@ export function DataProvider({ children }) {
     }
   };
 
+  const getUserPosts = async (userName) => {
+    dataDispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await axios.get(`/api/posts/user/${userName}`);
+      const posts = response.data.posts;
+
+      if (response.status === 200) {
+        dataDispatch({ type: "SET_USER_POSTS", payload: posts });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dataDispatch({ type: "SET_LOADING" });
+    }
+  };
+
   useEffect(() => {
     if (dataState.user) {
       fetchAllUsers();
@@ -86,11 +103,13 @@ export function DataProvider({ children }) {
       value={{
         user: dataState.user,
         users: dataState.users,
+        userPosts: dataState.userPosts,
         posts: dataState.posts,
         userFeed: dataState.userFeed,
         isLoading: dataState.isLoading,
         dataDispatch,
         getUser,
+        getUserPosts,
       }}
     >
       {children}

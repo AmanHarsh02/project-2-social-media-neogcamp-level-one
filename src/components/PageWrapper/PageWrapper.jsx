@@ -15,7 +15,7 @@ export function PageWrapper({ children }) {
       <aside className="mb-4 w-[15%] lg:w-[20%] h-[98%] sticky top-0 hidden md:block overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <SideNavigation setShowPostModal={setShowPostModal} />
       </aside>
-      <main className="w-[100%] lg:w-[50%] relative">
+      <main className="w-[100%] lg:w-[50%] h-max mb-[4rem]">
         {children}
         <BottomNavigation />
       </main>
