@@ -11,3 +11,4 @@ export { CommentCard } from "./CommentCard/CommentCard";
 export { GenericModal } from "./GenericModal/GenericModal";
 export { PostActions } from "./PostActions/PostActions";
 export { BottomNavigation } from "./BottomNavigation/BottomNavigation";
+export { SideNavDrawer } from "./SideNavDrawer/SideNavDrawer";

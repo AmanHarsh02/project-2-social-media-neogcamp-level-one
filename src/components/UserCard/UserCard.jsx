@@ -21,12 +21,12 @@ export function UserCard({ user, options }) {
           className="h-[4rem] w-[4rem] rounded-full object-cover"
         />
       </div>
-      <div className="grow h-[100%] lg:flex flex-col justify-center hidden">
+      <div className="grow h-[100%] lg:flex flex-col justify-center md:hidden">
         <h3 className="-mb-1">{`${user.firstName} ${user.lastName}`}</h3>
         <p className="-mt-1 text-slate-500">{`@${user.username}`}</p>
       </div>
       {options === "profile" && (
-        <OptionsIcon className="text-slate-400 h-[2rem] w-[2rem] p-2 rounded-full hover:bg-slate-200 hover:fill-blue-400 hidden lg:block" />
+        <OptionsIcon className="text-slate-400 h-[2rem] w-[2rem] p-2 rounded-full hover:bg-slate-200 hover:fill-blue-400 md:hidden lg:block" />
       )}
       {options === "follow" && (
         <FollowIcon className="text-slate-400 h-[2.5rem] w-[2.5rem] p-2 rounded-full hover:bg-slate-200 hover:fill-blue-400" />

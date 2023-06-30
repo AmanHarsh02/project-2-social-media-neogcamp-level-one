@@ -14,8 +14,11 @@ export function SideNavigation({ setShowPostModal }) {
   const { user } = useData();
 
   return (
-    <div className="flex flex-col h-full justify-between gap-4">
-      <div className=" grow flex flex-col gap-4 p-4 items-center lg:items-start">
+    <div className="flex flex-col h-full justify-between gap-4 pb-[4rem] md:pb-[0rem]">
+      <div
+        data-nav="side-nav"
+        className=" grow flex flex-col gap-4 p-4 md:items-center lg:items-start"
+      >
         <NavLink
           to="/"
           className={({ isActive }) => {
@@ -26,7 +29,7 @@ export function SideNavigation({ setShowPostModal }) {
           }}
         >
           <HomeIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Home</p>
+          <p className="md:hidden lg:block">Home</p>
         </NavLink>
         <NavLink
           to="/explore"
@@ -38,7 +41,7 @@ export function SideNavigation({ setShowPostModal }) {
           }}
         >
           <ExploreIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Explore</p>
+          <p className="md:hidden lg:block">Explore</p>
         </NavLink>
         <NavLink
           to="/bookmarks"
@@ -50,7 +53,7 @@ export function SideNavigation({ setShowPostModal }) {
           }}
         >
           <BookmarkIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Bookmarks</p>
+          <p className="md:hidden lg:block">Bookmarks</p>
         </NavLink>
         <NavLink
           to="/liked"
@@ -62,7 +65,7 @@ export function SideNavigation({ setShowPostModal }) {
           }}
         >
           <LikeIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Liked</p>
+          <p className="md:hidden lg:block">Liked</p>
         </NavLink>
         <NavLink
           to={`/profile/${user.username}`}
@@ -74,15 +77,15 @@ export function SideNavigation({ setShowPostModal }) {
           }}
         >
           <UserIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Profile</p>
+          <p className="md:hidden lg:block">Profile</p>
         </NavLink>
 
         <button
           onClick={() => setShowPostModal((prev) => !prev)}
-          className="flex items-center justify-center gap-2 p-2 lg:pr-4 w-max lg:w-[80%] rounded-full text-xl font-medium text-white bg-blue-400 shadow-md hover:bg-blue-100 hover:text-slate-800 hover:outline hover:outline-blue-400"
+          className="flex items-center justify-center gap-2 p-2 pr-4 md:pr-2 lg:pr-4 w-[80%] md:w-max lg:w-[80%] rounded-full text-xl font-medium text-white bg-blue-400 shadow-md hover:bg-blue-100 hover:text-slate-800 hover:outline hover:outline-blue-400"
         >
           <EditIcon className="text-[2rem] lg:text-xl" />
-          <p className="hidden lg:block">Post</p>
+          <p className="md:hidden lg:block">Post</p>
         </button>
       </div>
 
