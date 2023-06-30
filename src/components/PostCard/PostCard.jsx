@@ -10,7 +10,7 @@ import {
   AiFillHeart as LikeSolidIcon,
 } from "react-icons/ai";
 import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CommentCard } from "../CommentCard/CommentCard";
 import { useState } from "react";
 import { PostActions } from "../PostActions/PostActions";
@@ -61,7 +61,10 @@ export function PostCard({ post, showComment }) {
       <section>
         <div className="flex items-center gap-2 overflow-hidden justify-between">
           <div className="h-[100%] grow flex items-center gap-2">
-            <div className="w-max">
+            <div
+              onClick={() => navigate(`/profile/${postedBy.username}`)}
+              className="w-max cursor-pointer"
+            >
               <img
                 src={postedBy?.avatarUrl}
                 alt={`${postedBy?.username}'s Profile Image`}
