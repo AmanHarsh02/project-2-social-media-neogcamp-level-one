@@ -3,13 +3,7 @@ import { useData } from "../../contexts/DataContext";
 import { UserCard } from "../index";
 
 export function FollowSuggestions() {
-  const { user, users } = useData();
-
-  const suggestedUsers = users.filter(
-    (suggestedUser) =>
-      suggestedUser._id !== user._id &&
-      !user.following.includes(suggestedUser.username)
-  );
+  const { suggestedUsers } = useData();
 
   return (
     <div className="flex flex-col">
@@ -19,11 +13,11 @@ export function FollowSuggestions() {
 
       {suggestedUsers.map((user) => {
         return (
-          <NavLink to={`/profile/${user.username}`} key={user._id}>
+          <div key={user._id}>
             <UserCard user={user} options="follow" />
 
             <hr></hr>
-          </NavLink>
+          </div>
         );
       })}
     </div>

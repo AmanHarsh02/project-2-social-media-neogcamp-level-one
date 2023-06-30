@@ -6,13 +6,26 @@ import { BiUserPlus as FollowIcon } from "react-icons/bi";
 
 export function Profile() {
   const { userName } = useParams();
-  const { user, users, getUserPosts, userPosts, isLoading } = useData();
+  const {
+    user,
+    users,
+    getUserPosts,
+    userPosts,
+    followUserHandler,
+    unfollowUserHandler,
+    isLoading,
+  } = useData();
 
   useEffect(() => {
     getUserPosts(userName);
   }, [userName]);
 
   const userFound = users.find(({ username }) => username === userName);
+
+  const currentUser = userFound?.username === user.username;
+
+  const currentlyFollowing =
+    !currentUser && user?.following.find((user) => user._id === userFound?._id);
 
   const {
     firstName,
@@ -32,6 +45,14 @@ export function Profile() {
     website: "",
     followers: [],
     following: [],
+  };
+
+  const handleFollowClick = () => {
+    if (!currentlyFollowing) {
+      followUserHandler(userFound?._id);
+    } else {
+      unfollowUserHandler(userFound?._id);
+    }
   };
 
   return (
@@ -65,13 +86,16 @@ export function Profile() {
                     </div>
                   </div>
                   <div>
-                    {userFound.username === user.username ? (
+                    {currentUser ? (
                       <button className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500">
                         Edit Profile
                       </button>
                     ) : (
-                      <button className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500">
-                        Follow
+                      <button
+                        onClick={handleFollowClick}
+                        className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500"
+                      >
+                        {!currentlyFollowing ? "Follow" : "Unfollow"}
                       </button>
                     )}
                   </div>

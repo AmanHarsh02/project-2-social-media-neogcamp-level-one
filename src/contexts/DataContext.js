@@ -6,6 +6,7 @@ const DataContext = createContext();
 
 export function DataProvider({ children }) {
   const [dataState, dataDispatch] = useReducer(dataReducer, dataInitialState);
+  const token = localStorage.getItem("token");
 
   const fetchAllUsers = async () => {
     dataDispatch({ type: "SET_LOADING" });
@@ -85,6 +86,58 @@ export function DataProvider({ children }) {
     }
   };
 
+  const followUserHandler = async (userId) => {
+    dataDispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await axios.post(
+        `/api/users/follow/${userId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      const user = response.data.user;
+
+      if (response.status === 200) {
+        dataDispatch({ type: "SET_USER", payload: user });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dataDispatch({ type: "SET_LOADING" });
+    }
+  };
+
+  const unfollowUserHandler = async (userId) => {
+    dataDispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await axios.post(
+        `/api/users/unfollow/${userId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      const user = response.data.user;
+
+      if (response.status === 200) {
+        dataDispatch({ type: "SET_USER", payload: user });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dataDispatch({ type: "SET_LOADING" });
+    }
+  };
+
+  const suggestedUsers = dataState.users.filter(
+    (suggestedUser) =>
+      suggestedUser._id !== dataState.user._id &&
+      !dataState.user.following.find((user) => user._id === suggestedUser._id)
+  );
+
   useEffect(() => {
     if (dataState.user) {
       fetchAllUsers();
@@ -108,8 +161,11 @@ export function DataProvider({ children }) {
         userFeed: dataState.userFeed,
         isLoading: dataState.isLoading,
         dataDispatch,
+        suggestedUsers,
         getUser,
         getUserPosts,
+        followUserHandler,
+        unfollowUserHandler,
       }}
     >
       {children}
