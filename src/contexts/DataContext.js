@@ -4,6 +4,17 @@ import axios from "axios";
 
 const DataContext = createContext();
 
+const userAvatars = [
+  "https://img.icons8.com/?size=512&id=ad9jgRQm5uhO&format=png",
+  "https://img.icons8.com/?size=512&id=VB2vPL99QHto&format=png",
+  "https://img.icons8.com/?size=512&id=IHss1550u7a6&format=png",
+  "https://img.icons8.com/?size=512&id=M3NKqlTjSfkE&format=png",
+  "https://img.icons8.com/?size=512&id=lBTRRdDll3Z3&format=png",
+  "https://img.icons8.com/?size=512&id=UQKOOOZSVUAT&format=png",
+  "https://img.icons8.com/?size=512&id=7x6o3SY5s4fG&format=png",
+  "https://img.icons8.com/?size=512&id=P6I9sXaTnCR2&format=png",
+];
+
 export function DataProvider({ children }) {
   const [dataState, dataDispatch] = useReducer(dataReducer, dataInitialState);
   const token = localStorage.getItem("token");
@@ -146,13 +157,11 @@ export function DataProvider({ children }) {
     }
   }, [dataState.user]);
 
-  console.log(dataState.userFeed);
-
   useEffect(() => {
     if (dataState.posts.length > 0) {
       setUserFeed();
     }
-  }, [dataState.posts, dataState.user]);
+  }, [dataState.posts]);
 
   return (
     <DataContext.Provider
@@ -169,6 +178,7 @@ export function DataProvider({ children }) {
         getUserPosts,
         followUserHandler,
         unfollowUserHandler,
+        userAvatars,
       }}
     >
       {children}

@@ -11,7 +11,13 @@ export function UserFollowDetails({ option, user, setShowFollowModal }) {
       {option === "followers" && (
         <div onClick={() => setShowFollowModal(false)}>
           {followers.map((user) => {
-            return <UserCard user={user} hideDetails={false} />;
+            return (
+              <UserCard
+                user={user}
+                options="followDetails"
+                hideDetails={false}
+              />
+            );
           })}
         </div>
       )}
@@ -23,7 +29,13 @@ export function UserFollowDetails({ option, user, setShowFollowModal }) {
       {option === "following" && (
         <div onClick={() => setShowFollowModal(false)}>
           {following.map((user) => {
-            return <UserCard user={user} hideDetails={false} />;
+            return (
+              <UserCard
+                user={user}
+                options="followDetails"
+                hideDetails={false}
+              />
+            );
           })}
         </div>
       )}

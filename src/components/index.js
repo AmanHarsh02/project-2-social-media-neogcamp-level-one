@@ -13,3 +13,5 @@ export { PostActions } from "./PostActions/PostActions";
 export { BottomNavigation } from "./BottomNavigation/BottomNavigation";
 export { SideNavDrawer } from "./SideNavDrawer/SideNavDrawer";
 export { UserFollowDetails } from "./UserFollowDetails/UserFollowDetails";
+export { EditProfile } from "./EditProfile/EditProfile";
+export { AvatarOptions } from "./AvatarOptions/AvatarOptions";
