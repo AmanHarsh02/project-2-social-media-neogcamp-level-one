@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
 import { useData } from "../../contexts/DataContext";
-import { useEffect } from "react";
-import { PostCard } from "../../components";
-import { BiUserPlus as FollowIcon } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import { GenericModal, PostCard, UserFollowDetails } from "../../components";
 
 export function Profile() {
+  const [showFollowModal, setShowFollowModal] = useState(false);
+  const [userOption, setUserOption] = useState("");
   const { userName } = useParams();
   const {
     user,
@@ -52,6 +53,18 @@ export function Profile() {
       followUserHandler(userFound?._id);
     } else {
       unfollowUserHandler(userFound?._id);
+    }
+  };
+
+  const handleFollowModal = (e) => {
+    const selectedOption = e.target.dataset.follow;
+
+    if (selectedOption === "followers") {
+      setShowFollowModal(!showFollowModal);
+      setUserOption("followers");
+    } else if (selectedOption === "following") {
+      setShowFollowModal(!showFollowModal);
+      setUserOption("following");
     }
   };
 
@@ -106,14 +119,23 @@ export function Profile() {
                   <a href="/" target="blank">
                     {website}
                   </a>
-                  <div className="flex gap-4 my-1 justify-center md:justify-start text-slate-400 text-lg">
-                    <small className="cursor-pointer">
+                  <div
+                    onClick={handleFollowModal}
+                    className="flex gap-4 my-1 justify-center md:justify-start text-slate-400 text-lg"
+                  >
+                    <small className="cursor-pointer hover:underline">
                       <strong>{userPosts?.length}</strong> Posts
                     </small>
-                    <small className="cursor-pointer">
+                    <small
+                      data-follow="followers"
+                      className="cursor-pointer hover:underline"
+                    >
                       <strong>{followers.length}</strong> Followers
                     </small>
-                    <small className="cursor-pointer">
+                    <small
+                      data-follow="following"
+                      className="cursor-pointer hover:underline"
+                    >
                       <strong>{following.length}</strong> Following
                     </small>
                   </div>
@@ -128,6 +150,16 @@ export function Profile() {
                 return <PostCard key={post._id} post={post} />;
               })}
             </div>
+
+            {showFollowModal && (
+              <GenericModal setShowModal={setShowFollowModal} content="follow">
+                <UserFollowDetails
+                  option={userOption}
+                  user={userFound}
+                  setShowFollowModal={setShowFollowModal}
+                />
+              </GenericModal>
+            )}
           </div>
         </>
       )}

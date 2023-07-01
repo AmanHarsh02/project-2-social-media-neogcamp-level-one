@@ -89,7 +89,7 @@ export function SideNavigation({ setShowPostModal }) {
         </button>
       </div>
 
-      <UserCard user={user} options="profile" />
+      <UserCard user={user} options="profile" hideDetails={true} />
     </div>
   );
 }
