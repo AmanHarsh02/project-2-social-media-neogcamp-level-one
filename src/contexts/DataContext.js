@@ -46,11 +46,12 @@ export function DataProvider({ children }) {
     const posts = dataState.posts;
     const currentUser = dataState.user;
 
-    const userFeed = posts.filter(
-      (post) =>
-        currentUser.following.includes(post.username) ||
-        post.username === currentUser.username
-    );
+    const userFeed = posts.filter((post) => {
+      const isFollowing = currentUser.following.some(
+        (user) => user.username === post.username
+      );
+      return isFollowing || post.username === currentUser.username;
+    });
 
     dataDispatch({ type: "SET_USER_FEED", payload: userFeed });
   };
@@ -145,11 +146,13 @@ export function DataProvider({ children }) {
     }
   }, [dataState.user]);
 
+  console.log(dataState.userFeed);
+
   useEffect(() => {
     if (dataState.posts.length > 0) {
       setUserFeed();
     }
-  }, [dataState.posts]);
+  }, [dataState.posts, dataState.user]);
 
   return (
     <DataContext.Provider
