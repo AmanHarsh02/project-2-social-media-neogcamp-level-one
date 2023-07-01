@@ -3,7 +3,7 @@ import { BiUserPlus as FollowIcon } from "react-icons/bi";
 import { useData } from "../../contexts/DataContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
-export function UserCard({ user, options }) {
+export function UserCard({ user, options, hideDetails }) {
   const { followUserHandler } = useData();
   const navigate = useNavigate();
 
@@ -16,7 +16,9 @@ export function UserCard({ user, options }) {
   const handleNavigate = (e) => {
     if (e.target.closest("#icon-div") !== null) return;
 
-    navigate(`/profile/${user.username}`);
+    if (options === "follow") {
+      navigate(`/profile/${user.username}`);
+    }
   };
 
   return (
@@ -40,7 +42,11 @@ export function UserCard({ user, options }) {
         />
       </div>
 
-      <div className="grow h-[100%] lg:flex flex-col justify-center md:hidden">
+      <div
+        className={`grow h-[100%] lg:flex flex-col justify-center  ${
+          !hideDetails ? "" : "md:hidden"
+        } `}
+      >
         <h3 className="-mb-1">{`${user.firstName} ${user.lastName}`}</h3>
         <p className="-mt-1 text-slate-500">{`@${user.username}`}</p>
       </div>
