@@ -16,7 +16,7 @@ export function UserCard({ user, options, hideDetails }) {
   const handleNavigate = (e) => {
     if (e.target.closest("#icon-div") !== null) return;
 
-    if (options === "follow") {
+    if (options === "follow" || options === "followDetails") {
       navigate(`/profile/${user.username}`);
     }
   };

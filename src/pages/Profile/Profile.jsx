@@ -1,11 +1,17 @@
 import { useParams } from "react-router";
 import { useData } from "../../contexts/DataContext";
 import { useEffect, useState } from "react";
-import { GenericModal, PostCard, UserFollowDetails } from "../../components";
+import {
+  EditProfile,
+  GenericModal,
+  PostCard,
+  UserFollowDetails,
+} from "../../components";
 
 export function Profile() {
   const [showFollowModal, setShowFollowModal] = useState(false);
   const [userOption, setUserOption] = useState("");
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const { userName } = useParams();
   const {
     user,
@@ -93,14 +99,19 @@ export function Profile() {
                         className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover outline outline-4 outline-gray-200"
                       />
                     </div>
+
                     <div>
                       <h3 className="text-2xl font-medium">{`${firstName} ${lastName}`}</h3>
                       <p>{`@${username}`}</p>
                     </div>
                   </div>
+
                   <div>
                     {currentUser ? (
-                      <button className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500">
+                      <button
+                        onClick={() => setShowEditProfile(!showEditProfile)}
+                        className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500"
+                      >
                         Edit Profile
                       </button>
                     ) : (
@@ -159,6 +170,13 @@ export function Profile() {
                   setShowFollowModal={setShowFollowModal}
                 />
               </GenericModal>
+            )}
+
+            {showEditProfile && (
+              <EditProfile
+                user={userFound}
+                setShowEditProfile={setShowEditProfile}
+              />
             )}
           </div>
         </>
