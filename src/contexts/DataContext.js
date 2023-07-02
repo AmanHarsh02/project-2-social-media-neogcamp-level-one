@@ -144,6 +144,57 @@ export function DataProvider({ children }) {
     }
   };
 
+  const handleEditProfile = async (newUserDetails) => {
+    dataDispatch({ type: "SET_LOADING" });
+
+    try {
+      const response = await axios.post(
+        `/api/users/edit`,
+        {
+          userData: newUserDetails,
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      const user = response.data.user;
+
+      if (response.status === 201) {
+        dataDispatch({ type: "SET_USER", payload: user });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      dataDispatch({ type: "SET_LOADING" });
+    }
+  };
+
+  const handleProfilePictureUpload = async (selectedImage) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedImage);
+      formData.append(":use_filename", true);
+      formData.append("upload_preset", "uzfl2950");
+      formData.append("folder", "SnapSquad/profile-images");
+
+      const data = await fetch(
+        "https://api.cloudinary.com/v1_1/ddfyxmlhe/image/upload",
+        {
+          method: "post",
+          body: formData,
+        }
+      ).then((res) => res.json());
+
+      const mediaUrl = data.url;
+
+      return mediaUrl;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  console.log(dataState.isLoading);
+
   const suggestedUsers = dataState.users.filter(
     (suggestedUser) =>
       suggestedUser._id !== dataState.user._id &&
@@ -179,6 +230,8 @@ export function DataProvider({ children }) {
         followUserHandler,
         unfollowUserHandler,
         userAvatars,
+        handleEditProfile,
+        handleProfilePictureUpload,
       }}
     >
       {children}
