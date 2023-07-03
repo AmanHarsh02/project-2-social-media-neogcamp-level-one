@@ -10,7 +10,7 @@ import {
   AiFillHeart as LikeSolidIcon,
 } from "react-icons/ai";
 import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CommentCard } from "../CommentCard/CommentCard";
 import { useState } from "react";
 import { PostActions } from "../PostActions/PostActions";
@@ -88,7 +88,12 @@ export function PostCard({ post, showComment }) {
               <OptionsIcon size={18} />
             </div>
           )}
-          {showPostActions && <PostActions postId={post?._id} />}
+          {showPostActions && (
+            <PostActions
+              postId={post?._id}
+              setShowPostActions={setShowPostActions}
+            />
+          )}
         </div>
       </section>
 
@@ -96,7 +101,11 @@ export function PostCard({ post, showComment }) {
         <section className="flex flex-col gap-2">
           <p>{post?.content}</p>
           {post?.mediaURL && (
-            <img src={post.mediaURL} alt="Post Image" className="rounded-lg" />
+            <img
+              src={post.mediaURL}
+              alt="Post Image"
+              className="rounded-lg max-h-[500px] object-contain bg-slate-200"
+            />
           )}
         </section>
       </Link>

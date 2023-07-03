@@ -44,7 +44,7 @@ export function PageWrapper({ children }) {
         <BottomNavigation />
       </main>
 
-      <aside className="bg-white mb-4 w-[25%] h-[98%] sticky top-0 hidden lg:block rounded-lg overflow-y-auto [&::-webkit-scrollbar]:hidden">
+      <aside className="bg-white mb-4 w-[25%] max-h-[98%] h-max sticky top-0 hidden lg:block rounded-lg overflow-y-auto [&::-webkit-scrollbar]:hidden">
         <FollowSuggestions />
       </aside>
 
