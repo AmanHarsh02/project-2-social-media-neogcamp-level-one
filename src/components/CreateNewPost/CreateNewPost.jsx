@@ -2,6 +2,7 @@ import { BiEditAlt as EditIcon, BiCamera as MediaIcon } from "react-icons/bi";
 import { useData } from "../../contexts/DataContext";
 import { usePost } from "../../contexts/PostContext";
 import { useEffect, useRef, useState } from "react";
+import { ProgressBar } from "react-loader-spinner";
 
 export function CreateNewPost({ postId, edit = false }) {
   const { user, posts } = useData();
@@ -9,6 +10,7 @@ export function CreateNewPost({ postId, edit = false }) {
   const [selectedPost, setSelectedPost] = useState(false);
   const [errorState, setErrorState] = useState(false);
   const [mediaUrl, setMediaUrl] = useState("");
+  const [mediaUploadLoading, setMediaUploadLoading] = useState(false);
   const postContentRef = useRef("");
   let postFound = null;
 
@@ -48,10 +50,15 @@ export function CreateNewPost({ postId, edit = false }) {
   };
 
   const handleMediaClick = async (e) => {
-    const response = await handleMediaUpload(e.target.files[0]);
+    if (e.target.files[0]) {
+      setMediaUploadLoading(true);
+      setMediaUrl(URL.createObjectURL(e.target.files[0]));
+      const response = await handleMediaUpload(e.target.files[0]);
 
-    if (response) {
-      setMediaUrl(response);
+      if (response) {
+        setMediaUrl(response);
+        setMediaUploadLoading(false);
+      }
     }
   };
 
@@ -67,11 +74,11 @@ export function CreateNewPost({ postId, edit = false }) {
       <hr></hr>
 
       <div className="flex flex-row gap-2 h-max p-2">
-        <div className="h-[100%] w-max flex justify-center ">
+        <div className="h-[100%] w-max flex justify-center shrink-0">
           <img
             src={user.avatarUrl}
             alt={`${user.username}'s Profile Image`}
-            className="h-[4rem] w-[4rem] mt-1 rounded-full object-cover"
+            className="h-[3rem] w-[3rem] sm:h-[4rem] sm:w-[4rem] mt-1 rounded-full object-cover"
           />
         </div>
 
@@ -81,17 +88,31 @@ export function CreateNewPost({ postId, edit = false }) {
             defaultValue={edit ? selectedPost?.content : ""}
             onChange={() => setErrorState(false)}
             placeholder="Have something to share? Why not post it here!"
-            className="resize-none outline-none p-1 placeholder:font-light min-h-[150px]"
+            className="resize-none outline-none p-1 placeholder:font-light min-h-[100px] sm:min-h-[150px]"
           />
 
-          {mediaUrl && <hr></hr>}
+          {(mediaUrl || mediaUploadLoading) && <hr></hr>}
 
           {mediaUrl && (
             <img
               src={mediaUrl}
               alt="post"
-              className="w-max max-h-[150px] rounded-md"
+              className={`w-max max-h-[150px] rounded-md ${
+                mediaUploadLoading ? "blur" : ""
+              }`}
             />
+          )}
+
+          {mediaUploadLoading && (
+            <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] ">
+              <ProgressBar
+                height={"100%"}
+                width={"100%"}
+                ariaLabel="progress-bar-loading"
+                borderColor="#42A5F5"
+                barColor="#90CAF9"
+              />
+            </div>
           )}
         </div>
       </div>
@@ -113,8 +134,11 @@ export function CreateNewPost({ postId, edit = false }) {
         </div>
 
         <button
+          disabled={mediaUploadLoading}
           onClick={handlePostClick}
-          className="bg-blue-100 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 hover:text-slate-800 hover:shadow-md"
+          className={`bg-blue-100 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 hover:text-slate-800 hover:shadow-md ${
+            mediaUploadLoading && "cursor-not-allowed"
+          }`}
         >
           {edit ? "Edit Post" : "Post"}
         </button>
@@ -126,9 +150,11 @@ export function CreateNewPost({ postId, edit = false }) {
         </div>
       )}
 
-      {mediaUrl && (
+      {mediaUrl && selectedPost.mediaURL !== mediaUrl && (
         <div className="flex px-4 pb-4 text-green-500">
-          * Media uploaded successfully!
+          {mediaUploadLoading
+            ? "* Uploading..."
+            : "* Media uploaded successfully!"}
         </div>
       )}
     </div>

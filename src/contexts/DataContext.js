@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { dataReducer, dataInitialState } from "../reducers/DataReducer";
 import axios from "axios";
 
@@ -17,11 +23,11 @@ const userAvatars = [
 
 export function DataProvider({ children }) {
   const [dataState, dataDispatch] = useReducer(dataReducer, dataInitialState);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [postsLoading, setPostsLoading] = useState(false);
   const token = localStorage.getItem("token");
 
   const fetchAllUsers = async () => {
-    dataDispatch({ type: "SET_LOADING" });
-
     try {
       const response = await axios.get("/api/users");
       const users = response.data.users;
@@ -32,13 +38,11 @@ export function DataProvider({ children }) {
     } catch (e) {
       console.error(e);
     } finally {
-      dataDispatch({ type: "SET_LOADING" });
+      setUsersLoading(false);
     }
   };
 
   const fetchAllPosts = async () => {
-    dataDispatch({ type: "SET_LOADING" });
-
     try {
       const response = await axios.get("/api/posts");
       const posts = response.data.posts;
@@ -49,7 +53,7 @@ export function DataProvider({ children }) {
     } catch (e) {
       console.error(e);
     } finally {
-      dataDispatch({ type: "SET_LOADING" });
+      setPostsLoading(false);
     }
   };
 
@@ -193,15 +197,19 @@ export function DataProvider({ children }) {
     }
   };
 
-  console.log(dataState.isLoading);
-
   const suggestedUsers = dataState.users.filter(
     (suggestedUser) =>
       suggestedUser._id !== dataState.user._id &&
       !dataState.user.following.find((user) => user._id === suggestedUser._id)
   );
 
+  console.log(usersLoading, postsLoading);
+
   useEffect(() => {
+    if (dataState.user && dataState.posts.length <= 0) {
+      setUsersLoading(true);
+      setPostsLoading(true);
+    }
     if (dataState.user) {
       fetchAllUsers();
       fetchAllPosts();
@@ -223,6 +231,8 @@ export function DataProvider({ children }) {
         posts: dataState.posts,
         userFeed: dataState.userFeed,
         isLoading: dataState.isLoading,
+        usersLoading,
+        postsLoading,
         dataDispatch,
         suggestedUsers,
         getUser,

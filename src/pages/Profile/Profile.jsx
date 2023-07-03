@@ -7,6 +7,7 @@ import {
   PostCard,
   UserFollowDetails,
 } from "../../components";
+import { Oval } from "react-loader-spinner";
 
 export function Profile() {
   const [showFollowModal, setShowFollowModal] = useState(false);
@@ -76,7 +77,20 @@ export function Profile() {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && (
+        <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] self-center mt-10">
+          <Oval
+            height={"100%"}
+            width={"100%"}
+            color="#42A5F5"
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#90CAF9"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      )}
       {!isLoading && (
         <>
           <h2>{`${firstName} ${lastName}'s profile`}</h2>

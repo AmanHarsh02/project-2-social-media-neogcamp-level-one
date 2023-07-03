@@ -36,8 +36,8 @@ export function UserCard({ user, options, hideDetails }) {
         }`}
       >
         <img
-          src={user.avatarUrl}
-          alt={`${user.username}'s Profile Image`}
+          src={user?.avatarUrl}
+          alt={`${user?.username}'s Profile Image`}
           className="h-[4rem] w-[4rem] rounded-full object-cover"
         />
       </div>
