@@ -1,7 +1,7 @@
 import { MdOutlineClose as CloseIcon } from "react-icons/md";
 import { useData } from "../../contexts/DataContext";
 
-export function AvatarOptions({ setShowAvatarOption, setSelectedImage }) {
+export function AvatarOptions({ setShowAvatarOption, setMediaUrl }) {
   const { userAvatars } = useData();
 
   return (
@@ -25,7 +25,7 @@ export function AvatarOptions({ setShowAvatarOption, setSelectedImage }) {
             return (
               <img
                 onClick={() => {
-                  setSelectedImage(img);
+                  setMediaUrl(img);
                   setShowAvatarOption(false);
                 }}
                 src={img}

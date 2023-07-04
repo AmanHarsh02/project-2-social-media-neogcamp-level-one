@@ -12,7 +12,7 @@ import {
   Liked,
 } from "./pages/index";
 import { ProtectedRoute, Navbar, PageWrapper } from "./components/index";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -91,10 +91,7 @@ function App() {
         />
       </Routes>
 
-      {/* <ToastContainer
-        autoClose={3000}
-        className="w-min max-w-sm shadow-lg p-4 absolute top-0"
-      /> */}
+      <Toaster />
     </div>
   );
 }

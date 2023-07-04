@@ -1,7 +1,7 @@
 import { SlOptions as OptionsIcon } from "react-icons/sl";
 import { BiUserPlus as FollowIcon } from "react-icons/bi";
 import { useData } from "../../contexts/DataContext";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function UserCard({ user, options, hideDetails }) {
   const { followUserHandler } = useData();
@@ -38,7 +38,7 @@ export function UserCard({ user, options, hideDetails }) {
         <img
           src={user?.avatarUrl}
           alt={`${user?.username}'s Profile Image`}
-          className="h-[4rem] w-[4rem] rounded-full object-cover"
+          className="h-[4rem] w-[4rem] rounded-full object-cover bg-gray-300"
         />
       </div>
 

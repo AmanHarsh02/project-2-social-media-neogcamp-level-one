@@ -9,6 +9,7 @@ import { authInitialState, authReducer } from "../reducers/AuthReducer";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useData } from "./DataContext";
+import { toast } from "react-hot-toast";
 
 const AuthContext = createContext();
 let method = "";
@@ -50,6 +51,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.foundUser));
         dataDispatch({ type: "SET_USER", payload: response.data.foundUser });
+        toast.success("Login successfull!");
 
         navigate("/");
       }
@@ -92,6 +94,7 @@ export function AuthProvider({ children }) {
         localStorage.setItem("token", response.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(response.data.createdUser));
         dataDispatch({ type: "SET_USER", payload: response.data.createdUser });
+        toast.success("Signup successfull!");
 
         navigate("/");
       }

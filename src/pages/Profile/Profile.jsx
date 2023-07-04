@@ -13,10 +13,13 @@ export function Profile() {
   const [showFollowModal, setShowFollowModal] = useState(false);
   const [userOption, setUserOption] = useState("");
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
+  const [followButtonLoading, setFollowButtonLoading] = useState(false);
   const { userName } = useParams();
   const {
     user,
     users,
+    posts,
     getUserPosts,
     userPosts,
     followUserHandler,
@@ -25,8 +28,13 @@ export function Profile() {
   } = useData();
 
   useEffect(() => {
+    setPageLoading(true);
     getUserPosts(userName);
   }, [userName]);
+
+  useEffect(() => {
+    getUserPosts(userName);
+  }, [posts]);
 
   const userFound = users.find(({ username }) => username === userName);
 
@@ -55,10 +63,19 @@ export function Profile() {
     following: [],
   };
 
+  useEffect(() => {
+    if (!isLoading) {
+      setFollowButtonLoading(false);
+      setPageLoading(false);
+    }
+  }, [isLoading]);
+
   const handleFollowClick = () => {
     if (!currentlyFollowing) {
+      setFollowButtonLoading(true);
       followUserHandler(userFound?._id);
     } else {
+      setFollowButtonLoading(true);
       unfollowUserHandler(userFound?._id);
     }
   };
@@ -77,7 +94,7 @@ export function Profile() {
 
   return (
     <>
-      {isLoading && (
+      {pageLoading && (
         <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] self-center mt-10">
           <Oval
             height={"100%"}
@@ -91,26 +108,26 @@ export function Profile() {
           />
         </div>
       )}
-      {!isLoading && (
+      {!pageLoading && (
         <>
           <h2>{`${firstName} ${lastName}'s profile`}</h2>
           <div className="mt-4 overflow-y-auto ">
-            <header className="relative flex justify-between border-slate-200 border-b">
+            <header className="relative flex justify-center max-h-[20rem] md:max-h-[25rem]">
               <img
                 src={avatarUrl}
                 alt={`${username}'s profile`}
-                className="rounded-md"
+                className="rounded-md object-cover bg-gray-300 w-[100%]"
               />
             </header>
             <main className="flex flex-col items-center w-full">
               <div className="flex flex-col w-full relative">
-                <div className="shrink-0 flex justify-between gap-2 mx-[1rem] sm:mx-[2rem]">
+                <div className="shrink-0 flex justify-between gap-2 mx-[1rem] sm:mx-[2rem] flex-wrap">
                   <div className="flex flex-col gap-3 shrink-0 w-fit h-fit -mt-12 sm:-mt-20">
                     <div className="relative">
                       <img
                         src={avatarUrl}
                         alt={`${username}'s profile`}
-                        className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover outline outline-4 outline-gray-200"
+                        className="w-[80px] h-[80px] sm:w-[150px] sm:h-[150px] rounded-full object-cover outline outline-4 outline-gray-200 bg-gray-300 shadow-lg"
                       />
                     </div>
 
@@ -131,9 +148,24 @@ export function Profile() {
                     ) : (
                       <button
                         onClick={handleFollowClick}
-                        className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500"
+                        className="bg-blue-400 text-white p-2 px-4 mt-2 rounded-lg shadow-md hover:bg-blue-500 min-w-[6rem] flex justify-center items-center"
                       >
-                        {!currentlyFollowing ? "Follow" : "Unfollow"}
+                        {!followButtonLoading &&
+                          (!currentlyFollowing ? "Follow" : "Unfollow")}
+                        {followButtonLoading && (
+                          <div className="w-[1.6rem] h-[1.5rem]">
+                            <Oval
+                              height={"100%"}
+                              width={"100%"}
+                              color="white"
+                              visible={true}
+                              ariaLabel="oval-loading"
+                              secondaryColor="lightgray"
+                              strokeWidth={2}
+                              strokeWidthSecondary={2}
+                            />
+                          </div>
+                        )}
                       </button>
                     )}
                   </div>

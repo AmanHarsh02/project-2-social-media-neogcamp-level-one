@@ -23,6 +23,7 @@ export function PostCard({ post, showComment }) {
     postLoading,
     addBookmark,
     removeBookmark,
+    likedPosts,
     savedPosts,
   } = usePost();
   const [showPostActions, setShowPostActions] = useState(false);
@@ -31,9 +32,7 @@ export function PostCard({ post, showComment }) {
   const postedBy = users.find(({ username }) => username === post.username);
   const postedByCurrentUser = user.username === post.username;
   const postDate = new Date(post.createdAt);
-  const postLiked = post.likes.likedBy.find(
-    ({ username }) => username === user.username
-  );
+  const postLiked = likedPosts.some(({ _id }) => _id === post._id);
   const postBookmarked = savedPosts.some(({ _id }) => _id === post._id);
 
   const handlePostLike = () => {

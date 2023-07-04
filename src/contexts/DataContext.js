@@ -7,6 +7,7 @@ import {
 } from "react";
 import { dataReducer, dataInitialState } from "../reducers/DataReducer";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const DataContext = createContext();
 
@@ -117,6 +118,7 @@ export function DataProvider({ children }) {
 
       if (response.status === 200) {
         dataDispatch({ type: "SET_USER", payload: user });
+        toast.success("Followed user!");
       }
     } catch (e) {
       console.error(e);
@@ -140,6 +142,7 @@ export function DataProvider({ children }) {
 
       if (response.status === 200) {
         dataDispatch({ type: "SET_USER", payload: user });
+        toast.success("Unfollowed user!");
       }
     } catch (e) {
       console.error(e);
@@ -165,6 +168,7 @@ export function DataProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_USER", payload: user });
+        toast.success("Profile edited successfully!");
       }
     } catch (e) {
       console.error(e);
@@ -202,8 +206,6 @@ export function DataProvider({ children }) {
       suggestedUser._id !== dataState.user._id &&
       !dataState.user.following.find((user) => user._id === suggestedUser._id)
   );
-
-  console.log(usersLoading, postsLoading);
 
   useEffect(() => {
     if (dataState.user && dataState.posts.length <= 0) {
