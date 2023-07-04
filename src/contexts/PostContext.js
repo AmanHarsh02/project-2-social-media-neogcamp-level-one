@@ -2,13 +2,12 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { postInitialState, postReducer } from "../reducers/PostReducer";
 import axios from "axios";
 import { useData } from "./DataContext";
-import { useAuth } from "./AuthContext";
+import { toast } from "react-hot-toast";
 
 const PostContext = createContext();
 
 export function PostProvider({ children }) {
   const { user, posts, dataDispatch } = useData();
-  const { getUser } = useAuth();
   const [postState, postDispatch] = useReducer(postReducer, postInitialState);
   const token = localStorage.getItem("token");
 
@@ -55,6 +54,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+        toast.success("Post added to Liked posts!");
       }
     } catch (e) {
       console.error(e);
@@ -73,6 +73,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+        toast.error("Post removed from Liked posts!");
       }
     } catch (e) {
       console.error(e);
@@ -115,6 +116,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 200) {
         postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
+        toast.success("Post added to Bookmarks!");
       }
     } catch (e) {
       console.error(e);
@@ -140,6 +142,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 200) {
         postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
+        toast.error("Post removed Bookmarks!");
       }
     } catch (e) {
       console.error(e);
@@ -169,6 +172,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+        toast.success("New post created!");
       }
     } catch (e) {
       console.error(e);
@@ -188,6 +192,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+        toast.success("Post deleted successfully!");
       }
     } catch (e) {
       console.error(e);
@@ -219,6 +224,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
+        toast.success("Post edited successfully!");
       }
     } catch (e) {
       console.error(e);
