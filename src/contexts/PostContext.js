@@ -142,7 +142,7 @@ export function PostProvider({ children }) {
 
       if (response.status === 200) {
         postDispatch({ type: "SET_BOOKMARKS", payload: bookMarkedPosts });
-        toast.error("Post removed Bookmarks!");
+        toast.error("Post removed from Bookmarks!");
       }
     } catch (e) {
       console.error(e);

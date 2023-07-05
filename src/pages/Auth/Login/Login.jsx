@@ -4,6 +4,7 @@ import { FaEye as EyeIcon, FaEyeSlash as EyeOffIcon } from "react-icons/fa";
 import { useLocation } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
+import login_page_logo from "../../../assets/login_page_logo.svg";
 
 export function Login() {
   const location = useLocation();
@@ -45,10 +46,16 @@ export function Login() {
   return (
     <div className="min-h-screen flex justify-between">
       <div className="bg-blue-400 w-[50%] hidden md:flex h-screen justify-center items-center">
-        <h1>Logo</h1>
+        <div className="flex flex-col items-center gap-4  w-[40%]">
+          <img src={login_page_logo} alt="logo" className="w-[100%]" />
+          <h1 className="text-white font-medium text-3xl">SnapSquad</h1>
+        </div>
       </div>
 
-      <div className="bg-blue-100 w-[50%] grow flex h-screen justify-center items-center">
+      <div className="bg-blue-100 w-[50%] grow flex flex-col gap-4 h-screen justify-center items-center">
+        <h1 className="text-blue-400 font-medium md:hidden">
+          Login to SnapSquad
+        </h1>
         <form
           onSubmit={handleLogin}
           className="w-[80%] max-w-[400px] md:w-[50%]"

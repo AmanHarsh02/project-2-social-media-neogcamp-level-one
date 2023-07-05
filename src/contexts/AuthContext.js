@@ -16,7 +16,7 @@ let method = "";
 
 export function AuthProvider({ children }) {
   const [authState, authDispatch] = useReducer(authReducer, authInitialState);
-  const { dataDispatch } = useData();
+  const { dataDispatch, userAvatars } = useData();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
   const navigate = useNavigate();
@@ -87,6 +87,7 @@ export function AuthProvider({ children }) {
         lastName: authState.lastName,
         username: authState.username,
         password: authState.password,
+        avatarUrl: userAvatars[0],
       });
 
       if (response.status === 201) {
