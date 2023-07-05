@@ -173,6 +173,17 @@ export function AuthProvider({ children }) {
     });
   };
 
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    authDispatch({
+      type: "LOG_OUT",
+    });
+    toast.success("Logged Out Successfully!");
+    navigate("/login");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -181,6 +192,7 @@ export function AuthProvider({ children }) {
         authDispatch,
         loginValidation,
         signupValidation,
+        handleLogout,
       }}
     >
       {children}
