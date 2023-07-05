@@ -15,3 +15,4 @@ export { SideNavDrawer } from "./SideNavDrawer/SideNavDrawer";
 export { UserFollowDetails } from "./UserFollowDetails/UserFollowDetails";
 export { EditProfile } from "./EditProfile/EditProfile";
 export { AvatarOptions } from "./AvatarOptions/AvatarOptions";
+export { UserSettings } from "./UserSettings/UserSettings";

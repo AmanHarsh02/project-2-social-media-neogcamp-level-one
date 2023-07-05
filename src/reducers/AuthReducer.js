@@ -3,7 +3,6 @@ export const authInitialState = {
   password: "",
   firstName: "",
   lastName: "",
-  location: "",
   error: "",
 };
 
@@ -17,8 +16,6 @@ export const authReducer = (state, action) => {
       return { ...state, firstName: action.payload };
     case "SET_LASTNAME":
       return { ...state, lastName: action.payload };
-    case "SET_LOCATION":
-      return { ...state, location: action.payload ?? "/" };
     case "LOG_OUT":
       return {
         ...state,
@@ -26,7 +23,6 @@ export const authReducer = (state, action) => {
         password: "",
         firstName: "",
         lastName: "",
-        location: "",
       };
     case "SET_ERROR":
       return { ...state, error: action.payload };

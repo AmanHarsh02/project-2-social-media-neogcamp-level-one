@@ -18,8 +18,9 @@ export function PageWrapper({ children }) {
     if (!showSideNav) return;
 
     const clickedOn = e.target.dataset.nav;
+    const clickedOnUserCard = e.target.closest("#user-card")?.dataset?.nav;
 
-    if (clickedOn !== "side-nav") {
+    if (clickedOn !== "side-nav" && clickedOnUserCard !== "user-card") {
       setShowSideNav(false);
     }
   };
