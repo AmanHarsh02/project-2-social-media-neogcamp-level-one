@@ -27,7 +27,7 @@ export function PostSortingOptions() {
       {showSortOptions && (
         <div
           onClick={handleClick}
-          className="absolute -bottom-[6rem] right-0 z-10 mr-4 w-max bg-white rounded-lg shadow-lg overflow-hidden"
+          className="absolute -bottom-[6rem] right-0 z-10 mr-4 w-max bg-white rounded-lg shadow-lg overflow-hidden text-right"
         >
           <h3
             data-sort="latest"
