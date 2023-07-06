@@ -242,7 +242,7 @@ export function DataProvider({ children }) {
       type: "SET_FILTERED_POSTS",
       payload: filteredPosts,
     });
-  }, [dataState.sortMethod]);
+  }, [dataState.sortMethod, dataState.posts]);
 
   useEffect(() => {
     if (dataState.user && dataState.posts.length <= 0) {

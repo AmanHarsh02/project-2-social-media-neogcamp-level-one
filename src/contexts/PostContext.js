@@ -220,8 +220,6 @@ export function PostProvider({ children }) {
 
       const updatedPosts = response.data.posts;
 
-      console.log(updatedPosts);
-
       if (response.status === 201) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: updatedPosts });
         toast.success("Post edited successfully!");
