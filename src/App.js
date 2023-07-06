@@ -11,7 +11,7 @@ import {
   Signup,
   Liked,
 } from "./pages/index";
-import { ProtectedRoute, Navbar, PageWrapper } from "./components/index";
+import { ProtectedRoute, PageWrapper } from "./components/index";
 import { Toaster } from "react-hot-toast";
 
 function App() {
