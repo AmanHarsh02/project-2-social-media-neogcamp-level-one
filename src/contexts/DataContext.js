@@ -50,6 +50,11 @@ export function DataProvider({ children }) {
 
       if (response.status === 200) {
         dataDispatch({ type: "SET_ALL_POSTS", payload: posts });
+        const filteredPosts = applyFilters(posts);
+        dataDispatch({
+          type: "SET_FILTERED_POSTS",
+          payload: filteredPosts,
+        });
       }
     } catch (e) {
       console.error(e);
@@ -59,7 +64,7 @@ export function DataProvider({ children }) {
   };
 
   const setUserFeed = () => {
-    const posts = dataState.posts;
+    const posts = [...dataState.filteredPosts];
     const currentUser = dataState.user;
 
     const userFeed = posts.filter((post) => {
@@ -94,6 +99,12 @@ export function DataProvider({ children }) {
       const posts = response.data.posts;
 
       if (response.status === 200) {
+        posts.sort((a, b) => {
+          const postADate = new Date(a.createdAt);
+          const postBDate = new Date(b.createdAt);
+
+          return postBDate.getTime() - postADate.getTime();
+        });
         dataDispatch({ type: "SET_USER_POSTS", payload: posts });
       }
     } catch (e) {
@@ -207,6 +218,32 @@ export function DataProvider({ children }) {
       !dataState.user.following.find((user) => user._id === suggestedUser._id)
   );
 
+  const applyFilters = (posts) => {
+    const filteredPosts = [...posts];
+    const sortMethod = dataState.sortMethod;
+
+    if (sortMethod === "latest") {
+      filteredPosts.sort((a, b) => {
+        const postADate = new Date(a.createdAt);
+        const postBDate = new Date(b.createdAt);
+
+        return postBDate.getTime() - postADate.getTime();
+      });
+    } else if (sortMethod === "trending") {
+      filteredPosts.sort((a, b) => b?.likes?.likeCount - a?.likes?.likeCount);
+    }
+
+    return filteredPosts;
+  };
+
+  useEffect(() => {
+    const filteredPosts = applyFilters(dataState.posts);
+    dataDispatch({
+      type: "SET_FILTERED_POSTS",
+      payload: filteredPosts,
+    });
+  }, [dataState.sortMethod]);
+
   useEffect(() => {
     if (dataState.user && dataState.posts.length <= 0) {
       setUsersLoading(true);
@@ -219,10 +256,10 @@ export function DataProvider({ children }) {
   }, [dataState.user]);
 
   useEffect(() => {
-    if (dataState.posts.length > 0) {
+    if (dataState.filteredPosts.length > 0) {
       setUserFeed();
     }
-  }, [dataState.posts]);
+  }, [dataState.filteredPosts]);
 
   return (
     <DataContext.Provider
@@ -231,6 +268,7 @@ export function DataProvider({ children }) {
         users: dataState.users,
         userPosts: dataState.userPosts,
         posts: dataState.posts,
+        filteredPosts: dataState.filteredPosts,
         userFeed: dataState.userFeed,
         isLoading: dataState.isLoading,
         usersLoading,
