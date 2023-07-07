@@ -16,7 +16,7 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <div className="text-slate-800 relative">
+    <div className="text-slate-800 dark:text-white relative">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

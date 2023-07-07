@@ -26,7 +26,26 @@ export function DataProvider({ children }) {
   const [dataState, dataDispatch] = useReducer(dataReducer, dataInitialState);
   const [usersLoading, setUsersLoading] = useState(false);
   const [postsLoading, setPostsLoading] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const token = localStorage.getItem("token");
+
+  if (!theme) {
+    localStorage.setItem("theme", "light");
+  } else if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+
+  const handleToggleTheme = () => {
+    if (theme === "light") {
+      localStorage.theme = "dark";
+      setTheme("dark");
+    } else {
+      localStorage.theme = "light";
+      setTheme("light");
+    }
+  };
 
   const fetchAllUsers = async () => {
     try {
@@ -282,6 +301,7 @@ export function DataProvider({ children }) {
         userAvatars,
         handleEditProfile,
         handleProfilePictureUpload,
+        handleToggleTheme,
       }}
     >
       {children}

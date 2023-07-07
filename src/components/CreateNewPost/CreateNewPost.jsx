@@ -63,7 +63,7 @@ export function CreateNewPost({ postId, edit = false }) {
   };
 
   return (
-    <div className="bg-white rounded-xl">
+    <div className="bg-white dark:bg-gray-600 rounded-xl">
       <div className="flex items-center gap-1 p-3">
         <EditIcon />
         <h2 className="font-normal">
@@ -88,7 +88,7 @@ export function CreateNewPost({ postId, edit = false }) {
             defaultValue={edit ? selectedPost?.content : ""}
             onChange={() => setErrorState(false)}
             placeholder="Have something to share? Why not post it here!"
-            className="resize-none outline-none p-1 placeholder:font-light min-h-[100px] sm:min-h-[150px]"
+            className="dark:bg-gray-600 resize-none outline-none p-1 placeholder:font-light min-h-[100px] sm:min-h-[150px]"
           />
 
           {(mediaUrl || mediaUploadLoading) && <hr></hr>}
@@ -121,7 +121,7 @@ export function CreateNewPost({ postId, edit = false }) {
 
       <div className="flex items-center justify-between p-3">
         <div className="flex gap-2 items-center">
-          <label className="flex items-center gap-1 cursor-pointer bg-blue-100 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 hover:text-slate-800 hover:shadow-md">
+          <label className="flex items-center gap-1 cursor-pointer bg-blue-100 dark:bg-gray-500 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 dark:hover:bg-gray-400 hover:text-slate-800 dark:hover:text-white hover:shadow-md dark:shadow-gray-700">
             <input
               type="file"
               onChange={(e) => handleMediaClick(e)}
@@ -136,7 +136,7 @@ export function CreateNewPost({ postId, edit = false }) {
         <button
           disabled={mediaUploadLoading}
           onClick={handlePostClick}
-          className={`bg-blue-100 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 hover:text-slate-800 hover:shadow-md ${
+          className={`bg-blue-100 dark:bg-gray-500 text-slate-400 px-4 py-1 rounded-2xl hover:bg-blue-200 dark:hover:bg-gray-400 hover:text-slate-800 dark:hover:text-white hover:shadow-md dark:shadow-gray-700 ${
             mediaUploadLoading && "cursor-not-allowed"
           }`}
         >
