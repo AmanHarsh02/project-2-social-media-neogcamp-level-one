@@ -21,12 +21,14 @@ export function AuthProvider({ children }) {
   const [userDetails, setUserDetails] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (token) {
       setLoggedIn(true);
-      dataDispatch({ type: "SET_USER", payload: JSON.parse(user) });
+      user.following = [];
+      user.followers = [];
+      dataDispatch({ type: "SET_USER", payload: user });
 
       navigate("/");
     }
