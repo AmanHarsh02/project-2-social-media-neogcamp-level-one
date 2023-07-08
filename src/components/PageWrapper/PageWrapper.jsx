@@ -6,6 +6,7 @@ import {
   CreateNewPost,
   BottomNavigation,
   SideNavDrawer,
+  SearchBar,
 } from "../index";
 import { GiHamburgerMenu as HamburgerIcon } from "react-icons/gi";
 import { GrClose as CloseIcon } from "react-icons/gr";
@@ -45,7 +46,8 @@ export function PageWrapper({ children }) {
         <BottomNavigation />
       </main>
 
-      <aside className="bg-white dark:bg-gray-600 mb-4 w-[25%] max-h-[98%] h-max sticky top-0 hidden lg:block rounded-lg overflow-y-auto [&::-webkit-scrollbar]:hidden">
+      <aside className="hidden lg:flex flex-col gap-4 mb-4 w-[25%] max-h-[98%] h-max sticky top-0 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+        <SearchBar />
         <FollowSuggestions />
       </aside>
 
