@@ -17,3 +17,4 @@ export { EditProfile } from "./EditProfile/EditProfile";
 export { AvatarOptions } from "./AvatarOptions/AvatarOptions";
 export { UserSettings } from "./UserSettings/UserSettings";
 export { PostSortingOptions } from "./PostSortingOptions/PostSortingOptions";
+export { SearchBar } from "./SearchBar/SearchBar";

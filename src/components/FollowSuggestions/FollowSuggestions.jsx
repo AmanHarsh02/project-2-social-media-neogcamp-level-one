@@ -7,7 +7,7 @@ export function FollowSuggestions() {
   const { suggestedUsers, usersLoading } = useData();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-white dark:bg-gray-600 rounded-lg overflow-y-auto [&::-webkit-scrollbar]:hidden">
       <h3 className="p-2">Suggested for you</h3>
 
       <hr></hr>
