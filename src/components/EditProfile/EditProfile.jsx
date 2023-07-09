@@ -56,7 +56,7 @@ export function EditProfile({ user, setShowEditProfile }) {
   }, [mediaUrl]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 overflow-auto flex items-center justify-center bg-slate-800 bg-opacity-50 z-20">
+    <div className="fixed top-0 left-0 right-0 bottom-0 overflow-auto flex items-center justify-center bg-slate-800 bg-opacity-50 z-50">
       <div className="relative flex flex-col gap-2 w-[70%] max-w-[500px] bg-white dark:bg-gray-700 shadow-lg p-4 rounded-lg">
         <div className="flex gap-2 items-center">
           <EditIcon size={24} />

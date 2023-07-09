@@ -8,7 +8,7 @@ export function CreateNewPost({ postId, edit = false }) {
   const { user, posts } = useData();
   const { handleCreatePost, handleEditPost, handleMediaUpload } = usePost();
   const [selectedPost, setSelectedPost] = useState(false);
-  const [errorState, setErrorState] = useState(false);
+  const [errorState, setErrorState] = useState(null);
   const [mediaUrl, setMediaUrl] = useState("");
   const [mediaUploadLoading, setMediaUploadLoading] = useState(false);
   const postContentRef = useRef("");
@@ -30,7 +30,7 @@ export function CreateNewPost({ postId, edit = false }) {
 
     if (editOrPost === "Post") {
       if (postContentRef?.current?.value?.length <= 0) {
-        setErrorState(true);
+        setErrorState("* Please write something to post!");
       } else {
         handleCreatePost(postContentRef?.current?.value, mediaUrl);
         postContentRef.current.value = "";
@@ -38,7 +38,7 @@ export function CreateNewPost({ postId, edit = false }) {
       }
     } else {
       if (postContentRef?.current?.value?.length <= 0) {
-        setErrorState(true);
+        setErrorState("* Please write something to post!");
       } else {
         handleEditPost(
           selectedPost?._id,
@@ -50,14 +50,22 @@ export function CreateNewPost({ postId, edit = false }) {
   };
 
   const handleMediaClick = async (e) => {
-    if (e.target.files[0]) {
-      setMediaUploadLoading(true);
-      setMediaUrl(URL.createObjectURL(e.target.files[0]));
-      const response = await handleMediaUpload(e.target.files[0]);
+    const selectedFile = e.target.files[0];
 
-      if (response) {
-        setMediaUrl(response);
-        setMediaUploadLoading(false);
+    if (selectedFile) {
+      if (selectedFile.size > "2000000") {
+        setErrorState("* File size should not be more than 2MB!");
+      } else {
+        setErrorState(false);
+        setMediaUploadLoading(true);
+        setMediaUrl(URL.createObjectURL(selectedFile));
+
+        const response = await handleMediaUpload(selectedFile);
+
+        if (response) {
+          setMediaUrl(response);
+          setMediaUploadLoading(false);
+        }
       }
     }
   };
@@ -145,9 +153,7 @@ export function CreateNewPost({ postId, edit = false }) {
       </div>
 
       {errorState && (
-        <div className="flex px-4 pb-4 text-red-500">
-          * Please write something to post!
-        </div>
+        <div className="flex px-4 pb-4 text-red-500">{errorState}</div>
       )}
 
       {mediaUrl && selectedPost.mediaURL !== mediaUrl && (

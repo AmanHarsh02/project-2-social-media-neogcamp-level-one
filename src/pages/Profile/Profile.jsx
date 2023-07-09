@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   EditProfile,
   GenericModal,
+  Navbar,
   PostCard,
   UserFollowDetails,
 } from "../../components";
@@ -93,9 +94,11 @@ export function Profile() {
   };
 
   return (
-    <>
+    <div>
+      <Navbar path={`${firstName} ${lastName}`} />
+
       {pageLoading && (
-        <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] self-center mt-10">
+        <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] self-center mt-10 p-4">
           <Oval
             height={"100%"}
             width={"100%"}
@@ -109,8 +112,7 @@ export function Profile() {
         </div>
       )}
       {!pageLoading && (
-        <>
-          <h2>{`${firstName} ${lastName}'s profile`}</h2>
+        <div className="px-4 md:px-0">
           <div className="mt-4 overflow-y-auto ">
             <header className="relative flex justify-center max-h-[20rem] md:max-h-[25rem]">
               <img
@@ -229,8 +231,8 @@ export function Profile() {
               />
             )}
           </div>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }

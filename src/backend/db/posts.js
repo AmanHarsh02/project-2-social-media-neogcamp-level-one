@@ -36,7 +36,7 @@ export const posts = [
     content:
       "Check out this stunning landscape shot I took during my recent trip!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686988965/SnapSquad/post-images/IMG_1041_qdxc0u.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_1041_Compressed_ribejw.jpg",
     likes: {
       likeCount: 18,
       likedBy: [],
@@ -52,7 +52,7 @@ export const posts = [
     content:
       "Sharing some macro shots I captured in my backyard. Nature never ceases to amaze me!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686988843/SnapSquad/post-images/IMG_8746_hhir5c.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_8746_Compressed_t78yrm.jpg",
     likes: {
       likeCount: 14,
       likedBy: [],
@@ -78,7 +78,7 @@ export const posts = [
     content:
       "Just returned from a photography workshop. Learned so many new techniques! Here's Jaipur's Aksharsham Temple during a cloudy night!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989691/SnapSquad/post-images/IMG_7406_xj88md.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933453/SnapSquad/post-images/IMG_7406_Compressed_gaxnc2.jpg",
     likes: {
       likeCount: 27,
       likedBy: [],
@@ -94,7 +94,7 @@ export const posts = [
     content:
       "Had a great time exploring the countryside with my camera. Nature never fails to inspire me! Captured these Star Trails during the night.",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989828/SnapSquad/post-images/StarTrails_rsbqwm.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933455/SnapSquad/post-images/StarTrails_Compressed_q5hla0.jpg",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -120,7 +120,7 @@ export const posts = [
     content:
       "Experimenting with long exposure photography at sunset. Love how God painted the sky today!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989097/SnapSquad/post-images/IMG_8312_rq8iro.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_8312_Compressed_yl3mv6.jpg",
     likes: {
       likeCount: 34,
       likedBy: [],
@@ -161,7 +161,7 @@ export const posts = [
     content:
       "Captured this beautiful Kingfisher with a kill during a photography session!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989220/SnapSquad/post-images/IMG_9234_oiscpe.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_9234_Compressed_cdsass.jpg",
     likes: {
       likeCount: 4,
       likedBy: [],
@@ -177,7 +177,7 @@ export const posts = [
     content:
       "The magnificient Mehrangarh Fort of Jodhpur with the rarest Super Blue Blood Moon. The view from the top was absolutely breathtaking!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686989508/SnapSquad/post-images/IMG_8553_uidd77.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_8553_Compressed_mvsf4r.jpg",
     likes: {
       likeCount: 25,
       likedBy: [],
@@ -227,7 +227,7 @@ export const posts = [
     content:
       "Captured this shot during a Pre-Wedding shoot. Loved the architectural beuaty with an amazing sunset!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990213/SnapSquad/post-images/IMG_0024_hrhhjj.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933453/SnapSquad/post-images/IMG_0024_Compressed_nm9wfq.jpg",
     likes: {
       likeCount: 18,
       likedBy: [],
@@ -252,7 +252,7 @@ export const posts = [
     _id: "gKLt7qFu3D",
     content: "Steel Wool Orb. I love doing long exposure photography!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990738/SnapSquad/post-images/IMG_5479_jraj4x.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_5479_Compressed_rs0yhm.jpg",
     likes: {
       likeCount: 12,
       likedBy: [],
@@ -268,7 +268,7 @@ export const posts = [
     content:
       "Last weekend I attended a session steel-wool photography. Here's one shot from that session!",
     mediaURL:
-      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1686990570/SnapSquad/post-images/IMG_5481_bfurjr.jpg",
+      "https://res.cloudinary.com/ddfyxmlhe/image/upload/v1688933454/SnapSquad/post-images/IMG_5481_Compressed_kquvds.jpg",
     likes: {
       likeCount: 14,
       likedBy: [],

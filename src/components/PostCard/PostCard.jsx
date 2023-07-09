@@ -1,15 +1,15 @@
 import { useData } from "../../contexts/DataContext";
 import { usePost } from "../../contexts/PostContext";
 import { SlOptions as OptionsIcon } from "react-icons/sl";
-import {
-  BiComment as CommentIcon,
-  BiBookmark as BookMarkIcon,
-} from "react-icons/bi";
+import { BiComment as CommentIcon } from "react-icons/bi";
 import {
   AiOutlineHeart as LikeIcon,
   AiFillHeart as LikeSolidIcon,
 } from "react-icons/ai";
-import { BsBookmarkFill as BookMarkSolidIcon } from "react-icons/bs";
+import {
+  FaRegBookmark as BookMarkIcon,
+  FaBookmark as BookMarkSolidIcon,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { CommentCard } from "../CommentCard/CommentCard";
 import { useState } from "react";
@@ -147,7 +147,7 @@ export function PostCard({ post, showComment }) {
           ) : (
             <BookMarkIcon
               onClick={handlePostBookmark}
-              size={24}
+              size={22}
               className="cursor-pointer hover:fill-blue-400"
             />
           )}
