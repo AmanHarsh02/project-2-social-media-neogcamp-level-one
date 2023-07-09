@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router";
 import "./App.css";
 import {
-  Landing,
   Home,
   Explore,
   Profile,
@@ -28,14 +27,6 @@ function App() {
               <PageWrapper>
                 <Home />
               </PageWrapper>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/landing"
-          element={
-            <ProtectedRoute>
-              <Landing />
             </ProtectedRoute>
           }
         />

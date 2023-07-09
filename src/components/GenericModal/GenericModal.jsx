@@ -8,7 +8,7 @@ export function GenericModal({ children, setShowModal, content }) {
   };
 
   return (
-    <div className="absolute h-screen w-screen z-10">
+    <div className="absolute h-screen w-screen z-50">
       <section
         onMouseDown={handleModalClose}
         data-modal="modal-bg"
@@ -17,17 +17,16 @@ export function GenericModal({ children, setShowModal, content }) {
         <div
           className={`${
             content === "follow" ? "w-max" : "w-[90%]"
-          } max-w-[700px]`}
+          } max-w-[700px] relative`}
         >
           {children}
+          <CloseIcon
+            onClick={() => setShowModal((prev) => !prev)}
+            size={32}
+            className="absolute top-3 right-3 shadow shadow-gray-300 dark:shadow-gray-500 rounded-md cursor-pointer hiver:shadow hover:shadow-gray-600 dark:hover:shadow-gray-400"
+          />
         </div>
       </section>
-
-      <CloseIcon
-        onClick={() => setShowModal((prev) => !prev)}
-        size={32}
-        className="fixed top-4 right-4 shadow shadow-gray-600 rounded-md cursor-pointer hiver:shadow hover:shadow-gray-300"
-      />
     </div>
   );
 }

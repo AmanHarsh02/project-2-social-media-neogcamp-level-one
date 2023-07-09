@@ -302,6 +302,7 @@ export function DataProvider({ children }) {
         handleEditProfile,
         handleProfilePictureUpload,
         handleToggleTheme,
+        theme,
       }}
     >
       {children}

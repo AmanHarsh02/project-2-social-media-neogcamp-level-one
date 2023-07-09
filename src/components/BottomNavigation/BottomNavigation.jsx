@@ -11,7 +11,7 @@ export function BottomNavigation() {
   const { user } = useData();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 flex gap-2 justify-around items-center bg-gray-200 dark:bg-gray-900 w-[100%] p-1 rounded-t-lg shadow-2xl shadow-black drop-shadow-2xl z-10 md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 flex gap-2 justify-around items-center bg-gray-200 dark:bg-gray-900 w-[100%] p-1 rounded-t-lg shadow-2xl shadow-black drop-shadow-2xl z-50 md:hidden">
       <NavLink
         to="/"
         className={({ isActive }) => {

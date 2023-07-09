@@ -3,7 +3,7 @@ import { useData } from "../../contexts/DataContext";
 
 export function UserSettings({ setShowUserSettings }) {
   const { handleLogout } = useAuth();
-  const { handleToggleTheme } = useData();
+  const { theme, handleToggleTheme } = useData();
 
   const handleClick = (e) => {
     const clickedOn = e.target?.dataset?.option;
@@ -32,7 +32,7 @@ export function UserSettings({ setShowUserSettings }) {
         data-option="switch-theme"
         className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 p-2 px-4"
       >
-        Dark
+        {theme === "light" ? "Dark" : "Light"}
       </h3>
     </div>
   );

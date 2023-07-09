@@ -1,4 +1,3 @@
-export { Landing } from "./Landing/Landing";
 export { Home } from "./Home/Home";
 export { Explore } from "./Explore/Explore";
 export { Profile } from "./Profile/Profile";
