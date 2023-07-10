@@ -13,10 +13,10 @@ export function Navbar({ path }) {
   return (
     <div
       className={`h-[60px] flex items-center justify-between gap-1 ${
-        path === "Home" ? "px-4 md:px-2 pr-16 md:pr-2" : ""
+        path === "Home" ? "px-4 md:px-2" : ""
       } ${
         path === "Explore" ? "mb-4" : ""
-      } sticky top-0 bg-transparent backdrop-blur-md z-30 border-b-[1px] border-x-[1px] border-gray-300 dark:border-gray-700`}
+      } pr-16 md:pr-2 sticky top-0 bg-transparent backdrop-blur-md z-30 border-b-[1px] border-x-[1px] border-gray-300 dark:border-gray-700`}
     >
       <div className="flex items-center gap-1">
         {path !== "Home" && (
