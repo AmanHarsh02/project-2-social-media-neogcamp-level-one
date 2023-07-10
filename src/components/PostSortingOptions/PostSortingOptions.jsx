@@ -31,7 +31,7 @@ export function PostSortingOptions() {
       {showSortOptions && (
         <div
           onClick={handleClick}
-          className="absolute -bottom-[6rem] right-0 z-10 mr-4 w-max bg-white dark:bg-gray-600 rounded-lg shadow-lg dark:shadow-gray-700 overflow-hidden"
+          className="absolute -bottom-[6rem] right-0 z-10 mr-2 w-max bg-white dark:bg-gray-600 rounded-lg shadow-lg dark:shadow-gray-700 overflow-hidden"
         >
           <div
             id="sort"

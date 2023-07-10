@@ -255,6 +255,10 @@ export function DataProvider({ children }) {
     return filteredPosts;
   };
 
+  const setTitle = (title) => {
+    document.title = `${title} | SnapSquad`;
+  };
+
   useEffect(() => {
     const filteredPosts = applyFilters(dataState.posts);
     dataDispatch({
@@ -303,6 +307,7 @@ export function DataProvider({ children }) {
         handleProfilePictureUpload,
         handleToggleTheme,
         theme,
+        setTitle,
       }}
     >
       {children}

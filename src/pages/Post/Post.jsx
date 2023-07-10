@@ -8,7 +8,9 @@ import { Oval } from "react-loader-spinner";
 export function Post() {
   const { postId } = useParams();
   const { post, getPost, postLoading } = usePost();
-  const { posts } = useData();
+  const { posts, setTitle } = useData();
+
+  useEffect(() => setTitle("Post"), []);
 
   useEffect(() => {
     getPost(postId);

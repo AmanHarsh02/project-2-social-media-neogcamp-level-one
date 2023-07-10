@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BiUser as UserIcon,
   BiLockAlt as LockIcon,
@@ -7,6 +7,7 @@ import {
 import { FaEye as EyeIcon, FaEyeSlash as EyeOffIcon } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useData } from "../../../contexts/DataContext";
 
 export function Signup() {
   const location = useLocation();
@@ -15,6 +16,7 @@ export function Signup() {
     authDispatch,
     signupValidation,
   } = useAuth();
+  const { setTitle } = useData();
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export function Signup() {
       type: "SET_ERROR",
       payload: "",
     });
+    setTitle("Sign Up");
   }, []);
 
   const handleSignup = (e) => {

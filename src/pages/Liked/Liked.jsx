@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Navbar, PostCard } from "../../components";
+import { useData } from "../../contexts/DataContext";
 import { usePost } from "../../contexts/PostContext";
 
 export function Liked() {
   const { likedPosts } = usePost();
+  const { setTitle } = useData();
+
+  useEffect(() => setTitle("Liked Posts"), []);
 
   return (
     <div>

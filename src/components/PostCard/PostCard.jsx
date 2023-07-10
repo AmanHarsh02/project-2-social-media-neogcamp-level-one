@@ -71,7 +71,10 @@ export function PostCard({ post, showComment }) {
               />
             </div>
             <div className="grow h-[100%] flex flex-col justify-center">
-              <h3 className="-mb-1">{`${postedBy?.firstName} ${postedBy?.lastName}`}</h3>
+              <h3
+                onClick={() => navigate(`/profile/${postedBy.username}`)}
+                className="-mb-1 cursor-pointer"
+              >{`${postedBy?.firstName} ${postedBy?.lastName}`}</h3>
               <p className="-mt-1 text-slate-500 dark:text-slate-300">{`@${postedBy.username}`}</p>
               <small className="-mt-1 text-slate-500 dark:text-slate-300">{`${postDate.getUTCMonth()}-${postDate.getUTCDate()}-${postDate.getUTCFullYear()}, ${postDate.getUTCHours()}:${postDate.getUTCMinutes()}${
                 postDate.getUTCHours() >= 12 ? "pm" : "am"
