@@ -26,7 +26,14 @@ export function Profile() {
     followUserHandler,
     unfollowUserHandler,
     isLoading,
+    setTitle,
   } = useData();
+
+  useEffect(() => {
+    document.getElementById("main").scrollTo({ top: 0, behavior: "smooth" });
+  }, [userName]);
+
+  useEffect(() => setTitle("Profile"), []);
 
   useEffect(() => {
     setPageLoading(true);
@@ -98,7 +105,7 @@ export function Profile() {
       <Navbar path={`${firstName} ${lastName}`} />
 
       {pageLoading && (
-        <div className="w-[3rem] h-[3rem] md:w-[4rem] md:h-[4rem] self-center mt-10 p-4">
+        <div className="w-[3rem] h-[3rem] md:w-[6rem] md:h-[6rem] m-auto mt-10 p-4">
           <Oval
             height={"100%"}
             width={"100%"}

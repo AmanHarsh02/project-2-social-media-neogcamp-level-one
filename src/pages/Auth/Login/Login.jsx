@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 import { useAuth } from "../../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 import login_page_logo from "../../../assets/login_page_logo.svg";
+import { useData } from "../../../contexts/DataContext";
 
 export function Login() {
   const location = useLocation();
@@ -13,6 +14,7 @@ export function Login() {
     authDispatch,
     loginValidation,
   } = useAuth();
+  const { setTitle } = useData();
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export function Login() {
       type: "SET_ERROR",
       payload: "",
     });
+    setTitle("Login");
   }, []);
 
   const handleLogin = (e) => {

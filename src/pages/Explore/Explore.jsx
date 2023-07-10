@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { Navbar, PostCard, PostSortingOptions } from "../../components";
 import { useData } from "../../contexts/DataContext";
 
 export function Explore() {
-  const { filteredPosts } = useData();
+  const { filteredPosts, setTitle } = useData();
+
+  useEffect(() => setTitle("Explore"), []);
 
   return (
     <div>

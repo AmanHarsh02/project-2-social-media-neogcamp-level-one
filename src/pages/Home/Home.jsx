@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import {
   CreateNewPost,
   Navbar,
   PostSortingOptions,
   UserFeed,
 } from "../../components/index";
+import { useData } from "../../contexts/DataContext";
 
 export function Home() {
+  const { setTitle } = useData();
+
+  useEffect(() => setTitle("Home"), []);
+
   return (
     <div>
       <Navbar path="Home" />

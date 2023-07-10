@@ -5,7 +5,9 @@ import { useData } from "../../contexts/DataContext";
 
 export function Bookmarks() {
   const { savedPosts, getBookmarks } = usePost();
-  const { posts } = useData();
+  const { posts, setTitle } = useData();
+
+  useEffect(() => setTitle("Bookmarks"), []);
 
   useEffect(() => {
     getBookmarks();

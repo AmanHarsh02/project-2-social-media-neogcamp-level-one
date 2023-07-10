@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   SideNavigation,
   FollowSuggestions,
@@ -15,6 +15,10 @@ export function PageWrapper({ children }) {
   const [showPostModal, setShowPostModal] = useState(false);
   const [showSideNav, setShowSideNav] = useState(false);
 
+  useEffect(() => {
+    document.getElementById("main").scrollTo({ top: 0, behavior: "smooth" });
+  });
+
   const handleSideNavClose = (e) => {
     if (!showSideNav) return;
 
@@ -28,6 +32,7 @@ export function PageWrapper({ children }) {
 
   return (
     <div
+      id="main"
       onClick={(e) => handleSideNavClose(e)}
       className="flex flex-row justify-around h-screen bg-gray-200 dark:bg-gray-800 gap-4 md:px-4 lg:px-16 w-screen grow relative overflow-y-auto [&::-webkit-scrollbar]:hidden"
     >
